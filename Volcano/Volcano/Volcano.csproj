@@ -109,6 +109,8 @@
     <Compile Include="GameCode\Globals.cs" />
     <Compile Include="GameCode\PlayerCamera\PlayerCamera.cs" />
     <Compile Include="GameCode\Stage\Stage.cs" />
+    <Compile Include="GameCode\Structures\Hut.cs" />
+    <Compile Include="GameCode\Structures\Strucure.cs" />
     <Compile Include="GameCode\Utility\EffectConverter.cs" />
     <Compile Include="GameCode\Utility\Grid.cs" />
     <Compile Include="GameCode\Utility\Polygon.cs" />
@@ -169,7 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameCode\Effects\" />
-    <Folder Include="GameCode\Structures\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

@@ -42,7 +42,7 @@ namespace Volcano
             //get our input manager...
             TheInput = mainGame.input;
         }
-        private void LoadContent()
+        protected override void LoadContent()
         {
             //load model.
             TheModel = TheContent.Load<Model>(@"Models\volcano");
