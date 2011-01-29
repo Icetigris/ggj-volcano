@@ -82,13 +82,30 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
       <Private>False</Private>
     </Reference>
+    <Reference Include="XELibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\XELibrary\bin\x86\Debug\XELibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameCode\Characters\Character.cs" />
+    <Compile Include="GameCode\GameStates\BaseGameState.cs" />
+    <Compile Include="GameCode\GameStates\FadingState.cs" />
+    <Compile Include="GameCode\GameStates\GameStateInterface.cs" />
+    <Compile Include="GameCode\GameStates\LostGameState.cs" />
+    <Compile Include="GameCode\GameStates\OptionMenuState.cs" />
+    <Compile Include="GameCode\GameStates\PausedState.cs" />
+    <Compile Include="GameCode\GameStates\PlayingState.cs" />
+    <Compile Include="GameCode\GameStates\StartLevelState.cs" />
+    <Compile Include="GameCode\GameStates\StartMenuState.cs" />
+    <Compile Include="GameCode\GameStates\TitleIntroState.cs" />
+    <Compile Include="GameCode\GameStates\WonGameState.cs" />
+    <Compile Include="GameCode\GameStates\YesNoDialog.cs" />
     <Compile Include="GameCode\Globals.cs" />
     <Compile Include="GameCode\Utility\Timer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="MainGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -138,10 +155,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="GameCode\Attacks\" />
-    <Folder Include="GameCode\Characters\" />
     <Folder Include="GameCode\Effects\" />
-    <Folder Include="GameCode\GameStates\" />
     <Folder Include="GameCode\Structures\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace XELibrary
 {
-    public class GameStateManager : GameComponent, IGameStateManager
+    public class GameStateManager : GameComponent, IGameStateManager, Microsoft.Xna.Framework.IGameComponent
     {
         private Stack<GameState> states = new Stack<GameState>();
 
@@ -92,5 +92,7 @@ namespace XELibrary
         {
             get { return (states.Peek()); }
         }
+
+
     }
 }
