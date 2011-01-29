@@ -14,18 +14,19 @@ namespace Volcano
     /// includes the player and enemies. Characters have: health, a state of life,
     /// position. They also have a model and a matrix. Designed to be very simplistic.
     /// </summary>
-    class Character : Microsoft.Xna.Framework.IUpdateable, Microsoft.Xna.Framework.IDrawable
+    public class Character : DrawableGameComponent
     {
         #region variables
 
         public ContentManager TheContent { get; protected set; }
+        public GraphicsDevice TheGraphics { get; private set; }
 
         public Vector3 Position { get; protected set; }
         public bool IsAlive { get; protected set; }
         public int Health { get; protected set; }
 
         public Model TheModel { get; protected set; }
-        public Matrix TheMatrix { get; protected set; }
+        public Matrix TheRotation { get; protected set; }
 
         #endregion
 
@@ -33,60 +34,20 @@ namespace Volcano
         /// Constructor.
         /// </summary>
         public Character(Game mainGame,Vector3 pos, int health)
+            :base(mainGame)
         {
             TheContent = new ContentManager(mainGame.Services, "Content");
+            TheGraphics = mainGame.GraphicsDevice;
 
             Position = pos;
             Health = health;
             IsAlive = true;
+
+            TheRotation = Matrix.Identity;
         }
 
+        public virtual void UnloadContent() { }
 
-
-        #region IUpdateable Members
-
-        public bool Enabled
-        {
-            get { return true; }
-        }
-
-        public event EventHandler EnabledChanged;
-
-        public void Update(GameTime gameTime)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public int UpdateOrder
-        {
-            get { return 0; }
-        }
-
-        public event EventHandler UpdateOrderChanged;
-
-        #endregion
-
-        #region IDrawable Members
-
-        public void Draw(GameTime gameTime)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public int DrawOrder
-        {
-            get { return 0; }
-        }
-
-        public event EventHandler DrawOrderChanged;
-
-        public bool Visible
-        {
-            get { return true; }
-        }
-
-        public event EventHandler VisibleChanged;
-
-        #endregion
+        public virtual void Draw(GameTime gameTime) { }
     }
 }

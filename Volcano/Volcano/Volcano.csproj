@@ -105,6 +105,7 @@
     <Compile Include="GameCode\GameStates\YesNoDialog.cs" />
     <Compile Include="GameCode\Globals.cs" />
     <Compile Include="GameCode\Stage\Stage.cs" />
+    <Compile Include="GameCode\Utility\EffectConverter.cs" />
     <Compile Include="GameCode\Utility\Grid.cs" />
     <Compile Include="GameCode\Utility\Timer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

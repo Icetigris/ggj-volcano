@@ -38,14 +38,17 @@ namespace Volcano
         public IPausedState PausedState;
         public IYesNoDialogState YesNoDialogState;
 
+        public Stage TheStage;
+
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            TheStage = new Stage(this);
+
             input = new InputHandler(this);
             Components.Add(input);
-            
 
             camera = new Camera(this);
             Components.Add(camera);
@@ -77,6 +80,8 @@ namespace Volcano
         {
             // TODO: Add your initialization logic here
 
+            //Stage is intialized when it's constructed...
+
             base.Initialize();
         }
 
@@ -99,6 +104,7 @@ namespace Volcano
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            TheStage.Unload();
         }
 
         /// <summary>
@@ -127,8 +133,21 @@ namespace Volcano
 
             // TODO: Add your drawing code here
             SpriteBatch.Begin();
+
             base.Draw(gameTime);
+
+            //draw states...
+            ManageStateDraw(gameTime);
+
             SpriteBatch.End();
+        }
+
+        protected void ManageStateDraw(GameTime gameTime)
+        {
+            if (gameManager.State == PlayingState)
+            {
+                TheStage.Draw(gameTime);
+            }
         }
     }
 }

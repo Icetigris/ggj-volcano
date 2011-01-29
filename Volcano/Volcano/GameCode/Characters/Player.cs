@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Volcano
 {
-    class Player : Character, Microsoft.Xna.Framework.IUpdateable, Microsoft.Xna.Framework.IDrawable
+    class Player : Character
     {
         #region Variables
         #endregion
@@ -28,74 +28,39 @@ namespace Volcano
         private void LoadContent()
         {
             //load model.
-            TheModel = TheContent.Load<Model>(@"Models\cartridge_multi");
+            //TheModel = TheContent.Load<Model>(@"Models\volcano");
             //add model to global list of models.
         }
-        public void UnloadContent()
+        public override void UnloadContent()
         {
             TheContent.Unload();
         }
 
-        #region IUpdateable Members
 
-        bool IUpdateable.Enabled
+        public override void Draw(GameTime gameTime)
         {
-            get { throw new NotImplementedException(); }
+            //define draw code here.
+            float myZoom = 1.0f;
+
+            Matrix[] transforms = new Matrix[TheModel.Bones.Count];
+            float aspectRatio = TheGraphics.Viewport.Width / TheGraphics.Viewport.Height;
+            TheModel.CopyAbsoluteBoneTransformsTo(transforms);
+            Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
+                aspectRatio, 1.0f, 10000.0f);
+            Matrix view = Matrix.CreateLookAt(new Vector3(0.0f, 50.0f, myZoom), Vector3.Zero, Vector3.Up);
+
+            foreach (ModelMesh mesh in TheModel.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.EnableDefaultLighting();
+
+                    effect.View = view;
+                    effect.Projection = projection;
+                    effect.World = TheRotation * transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(Position);
+                }
+                mesh.Draw();
+            }
         }
-
-        event EventHandler IUpdateable.EnabledChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        void IUpdateable.Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IUpdateable.UpdateOrder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        event EventHandler IUpdateable.UpdateOrderChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        #endregion
-
-        #region IDrawable Members
-
-        void IDrawable.Draw(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IDrawable.DrawOrder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        event EventHandler IDrawable.DrawOrderChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        bool IDrawable.Visible
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        event EventHandler IDrawable.VisibleChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        #endregion
     }
 }
