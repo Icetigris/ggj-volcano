@@ -101,6 +101,9 @@ namespace Volcano
 
             // TODO: use this.Content to load your game content here
             TheStage.LoadContent();
+
+            //DEBUG code
+            TheStage.enemies.Add(new Enemy(this, TheStage, new Vector3(500, 0, 0), 1));
         }
 
         /// <summary>

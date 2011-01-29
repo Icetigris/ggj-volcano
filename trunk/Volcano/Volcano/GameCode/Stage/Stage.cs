@@ -19,14 +19,19 @@ namespace Volcano
         public List<Character> enemies { get; private set; }
 
         /// <summary>
-        /// The camera.
-        /// </summary>
-        public PlayerCamera TheCamera { get; private set; }
-
-        /// <summary>
         /// The active attacks.  (No need to ever set this, since List is mutable.)
         /// </summary>
         public List<Attack> attacks { get; private set; }
+
+        /// <summary>
+        /// The structures.  (No need to ever set this, since List is mutable.)
+        /// </summary>
+        public List<Strucure> structures { get; private set; }
+
+        /// <summary>
+        /// The camera.
+        /// </summary>
+        public PlayerCamera TheCamera { get; private set; }
 
         /// <summary>
         /// The game.  (You just lost.)
@@ -39,6 +44,7 @@ namespace Volcano
             TheGame = game;
             this.enemies = new List<Character>();
             this.attacks = new List<Attack>();
+            this.structures = new List<Strucure>();
 
             Initialize();
         }
@@ -50,7 +56,7 @@ namespace Volcano
             
         }
 
-        public void LoadContent()
+        public new void LoadContent()
         {
             //create player
             main = new Player(TheGame, this, Vector3.Zero, 100);
@@ -77,14 +83,31 @@ namespace Volcano
             //and all the attacks
             foreach (Attack a in attacks)
                 a.Update(gameTime);
+
+            //and all the structures
+            foreach (Strucure s in structures)
+                s.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
             //TODO: Draw the map and volcano
+            // - Isn't this just the player?  ~Ben
 
             //draw player
             main.Draw(gameTime);
+
+            //and all the enemies
+            foreach (Enemy e in enemies)
+                e.Draw(gameTime);
+
+            //and all the attacks
+            foreach (Attack a in attacks)
+                a.Draw(gameTime);
+
+            //and all the structures
+            foreach (Strucure s in structures)
+                s.Draw(gameTime);
         }
     }
 }

@@ -49,10 +49,10 @@ namespace Volcano
             TheRotation = Matrix.Identity;
         }
 
-        public virtual void UnloadContent() { }
+        public virtual new void UnloadContent() { }
 
-        public virtual void Update(GameTime gameTime) { }
+        public virtual new void Update(GameTime gameTime) { }
 
-        public virtual void Draw(GameTime gameTime) { }
+        public virtual new void Draw(GameTime gameTime) { }
     }
 }
