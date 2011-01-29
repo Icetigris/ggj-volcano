@@ -43,6 +43,7 @@ namespace Volcano
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            
             Content.RootDirectory = "Content";
 
             TheStage = new Stage(this);
@@ -91,6 +92,10 @@ namespace Volcano
         /// </summary>
         protected override void LoadContent()
         {
+            PresentationParameters pp = graphics.GraphicsDevice.PresentationParameters;
+            graphics.GraphicsDevice.DepthStencilBuffer = new DepthStencilBuffer(graphics.GraphicsDevice, pp.BackBufferWidth, 
+            pp.BackBufferHeight, pp.AutoDepthStencilFormat, pp.MultiSampleType, pp.MultiSampleQuality);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
