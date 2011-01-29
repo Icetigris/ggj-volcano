@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Volcano
 {
-    class Enemy : Character, Microsoft.Xna.Framework.IUpdateable, Microsoft.Xna.Framework.IDrawable
+    class Enemy : Character
     {
         #region Variables
         #endregion
@@ -28,69 +28,19 @@ namespace Volcano
         private void LoadContent()
         {
             //load model.
+            TheModel = TheContent.Load<Model>(@"Models\cartridge_multi");
             //add model to global list of models.
         }
-
-        #region IUpdateable Members
-
-        bool IUpdateable.Enabled
+        public override void UnloadContent()
         {
-            get { throw new NotImplementedException(); }
+            TheContent.Unload();
         }
 
-        event EventHandler IUpdateable.EnabledChanged
+
+
+        public override void Draw(GameTime gameTime)
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            base.Draw(gameTime);
         }
-
-        void IUpdateable.Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IUpdateable.UpdateOrder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        event EventHandler IUpdateable.UpdateOrderChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        #endregion
-
-        #region IDrawable Members
-
-        void IDrawable.Draw(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IDrawable.DrawOrder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        event EventHandler IDrawable.DrawOrderChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        bool IDrawable.Visible
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        event EventHandler IDrawable.VisibleChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        #endregion
     }
 }
