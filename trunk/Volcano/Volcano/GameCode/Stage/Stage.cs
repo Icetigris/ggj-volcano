@@ -18,6 +18,9 @@ namespace Volcano
         /// </summary>
         public List<Character> enemies { get; private set; }
 
+        /// <summary>
+        /// The camera.
+        /// </summary>
         public PlayerCamera TheCamera { get; private set; }
 
         /// <summary>
@@ -35,11 +38,12 @@ namespace Volcano
         {
             TheGame = game;
             this.enemies = new List<Character>();
+            this.attacks = new List<Attack>();
 
             Initialize();
         }
 
-        private void Initialize()
+        private new void Initialize()
         {
             base.Initialize();
 
@@ -58,10 +62,21 @@ namespace Volcano
             main.UnloadContent();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             //need to update camera
             TheCamera.Update(gameTime);
+
+            //and the main
+            main.Update(gameTime);
+
+            //and all the enemies
+            foreach (Enemy e in enemies)
+                e.Update(gameTime);
+
+            //and all the attacks
+            foreach (Attack a in attacks)
+                a.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -70,20 +85,6 @@ namespace Volcano
 
             //draw player
             main.Draw(gameTime);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            //Oprah: AND YOU GET AN UPDATE!
-            main.Update(gameTime);
-            
-            //AND YOU ALL GET UPDATES!
-            foreach(Enemy e in enemies)
-                e.Update(gameTime);
-
-            //EVERYBODY GETS UPDATES!!!
-            foreach (Attack a in attacks)
-                a.Update(gameTime);
         }
     }
 }
