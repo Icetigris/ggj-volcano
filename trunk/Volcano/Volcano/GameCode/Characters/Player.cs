@@ -14,14 +14,25 @@ namespace Volcano
     class Player : Character
     {
         #region Variables
+        /// <summary>        
+        /// The stage.        
+        /// </summary>
+        private Stage theStage;
 
         public InputHandler TheInput { get; private set; }
-
         #endregion
 
+        /// <summary>
+        /// Constructor for the Player.        
+        /// </summary>        
+        /// <param name="mainGame">The game.</param>        
+        /// <param name="s">The stage.</param>        
+        /// <param name="pos">Position to spawn the player at.</param>        
+        /// <param name="health">Health to give the player.</param>        
         public Player(MainGame mainGame,Stage stage,Vector3 pos, int health)
             : base(mainGame,stage,pos, health)
         {
+            theStage = s;
             Initialize(mainGame);
             LoadContent();
         }
