@@ -86,6 +86,40 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Textures\pressureGaugeRock.png">
+      <Name>pressureGaugeRock</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\pressureOrangeLava1.png">
+      <Name>pressureOrangeLava1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\pressureOrangeLava2.png">
+      <Name>pressureOrangeLava2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\pressureRedLava1.png">
+      <Name>pressureRedLava1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\pressureRedLava2.png">
+      <Name>pressureRedLava2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\pressureGaugeBar.png">
+      <Name>pressureGaugeBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Models\rock.FBX">
       <Name>rock</Name>
       <Importer>FbxImporter</Importer>

@@ -107,6 +107,10 @@
     <Compile Include="GameCode\GameStates\WonGameState.cs" />
     <Compile Include="GameCode\GameStates\YesNoDialog.cs" />
     <Compile Include="GameCode\Globals.cs" />
+    <Compile Include="GameCode\HUD\ActiveOverlays.cs" />
+    <Compile Include="GameCode\HUD\HUD.cs" />
+    <Compile Include="GameCode\HUD\Overlay.cs" />
+    <Compile Include="GameCode\HUD\PressureBar.cs" />
     <Compile Include="GameCode\PlayerCamera\PlayerCamera.cs" />
     <Compile Include="GameCode\Stage\Stage.cs" />
     <Compile Include="GameCode\Structures\Hut.cs" />

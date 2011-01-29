@@ -17,6 +17,7 @@ namespace Volcano
     /// </summary>
     public class PlayerCamera : Microsoft.Xna.Framework.GameComponent, Microsoft.Xna.Framework.IGameComponent
     {
+        protected MainGame TheGame;
         protected IInputHandler input;
 
         private Matrix projection;
@@ -44,6 +45,7 @@ namespace Volcano
         public PlayerCamera(MainGame game)
             : base(game)
         {
+            TheGame = game;
             input = game.input;
             theta = 0.0f;
         }
@@ -81,52 +83,55 @@ namespace Volcano
         public override void Update(GameTime gameTime)
         {
 
-            float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float radius = 5000.0f;
+            if (TheGame.gameManager.State == TheGame.PlayingState)
+            {
+                float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                float radius = 5000.0f;
 
-            if (input.KeyboardState.IsKeyDown(Keys.Left) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickLeft)) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadLeft)))
-            {
-                theta += timeDelta;
-            }
-            if (input.KeyboardState.IsKeyDown(Keys.Right) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickRight)) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadRight)))
-            {
-                theta -= timeDelta;
-            }
+                if (input.KeyboardState.IsKeyDown(Keys.Left) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickLeft)) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadLeft)))
+                {
+                    theta += timeDelta;
+                }
+                if (input.KeyboardState.IsKeyDown(Keys.Right) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickRight)) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadRight)))
+                {
+                    theta -= timeDelta;
+                }
 
-            if (input.KeyboardState.IsKeyDown(Keys.Down) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickDown)) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadDown)))
-            {
-                if (cameraPosition.Y >= 400.0f) cameraPosition.Y -= 200;
-            }
-            if (input.KeyboardState.IsKeyDown(Keys.Up) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickUp)) ||
-                (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadUp)))
-            {
-                if (cameraPosition.Y <= 5000.0f) cameraPosition.Y += 200;
-            }
+                if (input.KeyboardState.IsKeyDown(Keys.Down) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickDown)) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadDown)))
+                {
+                    if (cameraPosition.Y >= 400.0f) cameraPosition.Y -= 200;
+                }
+                if (input.KeyboardState.IsKeyDown(Keys.Up) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickUp)) ||
+                    (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadUp)))
+                {
+                    if (cameraPosition.Y <= 5000.0f) cameraPosition.Y += 200;
+                }
 
-            if (input.KeyboardState.IsKeyDown(Keys.S))
-            {
-                cameraYaw += 200;
-            }
-            if (input.KeyboardState.IsKeyDown(Keys.W))
-            {
-                cameraYaw -= 200;
-            }
+                if (input.KeyboardState.IsKeyDown(Keys.S))
+                {
+                    cameraYaw += 200;
+                }
+                if (input.KeyboardState.IsKeyDown(Keys.W))
+                {
+                    cameraYaw -= 200;
+                }
 
-            cameraPosition.X = radius * (float)Math.Cos(theta);
-            cameraPosition.Z = radius * (float)Math.Sin(theta);
-            cameraYaw = (cameraYaw < 0.0f) ? cameraYaw : ((cameraYaw > cameraPosition.Y) ? cameraPosition.Y : cameraYaw);
-            cameraTarget.Y = cameraPosition.Y - cameraYaw;
-            Console.Out.Write("Position: {0}, {1}, {2}\n", cameraPosition.X, cameraPosition.Y, cameraPosition.Z);
+                cameraPosition.X = radius * (float)Math.Cos(theta);
+                cameraPosition.Z = radius * (float)Math.Sin(theta);
+                cameraYaw = (cameraYaw < 0.0f) ? cameraYaw : ((cameraYaw > cameraPosition.Y) ? cameraPosition.Y : cameraYaw);
+                cameraTarget.Y = cameraPosition.Y - cameraYaw;
+                Console.Out.Write("Position: {0}, {1}, {2}\n", cameraPosition.X, cameraPosition.Y, cameraPosition.Z);
 
-            Matrix.CreateLookAt(ref cameraPosition, ref cameraTarget, ref cameraUpVector,
-                out view);
+                Matrix.CreateLookAt(ref cameraPosition, ref cameraTarget, ref cameraUpVector,
+                    out view);
+            }
 
             base.Update(gameTime);
         }

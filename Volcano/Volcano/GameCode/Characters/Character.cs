@@ -26,6 +26,7 @@ namespace Volcano
         public Vector3 Position { get; protected set; }
         public bool IsAlive { get; protected set; }
         public int Health { get; protected set; }
+        public int InitialHealth { get; protected set; }
 
         public Model TheModel { get; protected set; }
         public Matrix TheRotation { get; protected set; }
@@ -44,6 +45,7 @@ namespace Volcano
 
             Position = pos;
             Health = health;
+            InitialHealth = health;
             IsAlive = true;
 
             TheRotation = Matrix.Identity;
