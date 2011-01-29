@@ -12,11 +12,15 @@ namespace Volcano
     class Enemy : Character
     {
         #region Variables
+        /// <summary>
+        /// The stage.
+        /// </summary>
         #endregion
 
         public Enemy(MainGame mainGame,Stage stage,Vector3 pos, int health)
             : base(mainGame,stage,pos, health)
         {
+            theStage = stage;
             Initialize();
             LoadContent();
         }
@@ -41,6 +45,19 @@ namespace Volcano
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            //TODO move the enemies (YES THIS MEANS PATHFINDING :\)
+            //Berfore/after moving...
+            //foreach (Attack a in theStage.attacks)
+            //{
+                //Check the enemies hitbox with the attack area, if there's a hit do damage.
+            //}
+            
+            //Since we're not really doing anything here...
+            base.Update(gameTime);
         }
     }
 }
