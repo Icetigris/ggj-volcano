@@ -18,20 +18,24 @@ namespace Volcano
     {
         #region variables
 
-        public Vector3 Position { get; private set; }
-        public bool IsAlive { get; private set; }
-        public int Health { get; private set; }
+        public ContentManager TheContent { get; protected set; }
 
-        public Model TheModel { get; private set; }
-        public Matrix TheMatrix { get; private set; }
+        public Vector3 Position { get; protected set; }
+        public bool IsAlive { get; protected set; }
+        public int Health { get; protected set; }
+
+        public Model TheModel { get; protected set; }
+        public Matrix TheMatrix { get; protected set; }
 
         #endregion
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Character(Vector3 pos, int health)
+        public Character(Game mainGame,Vector3 pos, int health)
         {
+            TheContent = new ContentManager(mainGame.Services, "Content");
+
             Position = pos;
             Health = health;
             IsAlive = true;

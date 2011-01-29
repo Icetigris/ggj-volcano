@@ -14,8 +14,8 @@ namespace Volcano
         #region Variables
         #endregion
 
-        public Player(Vector3 pos, int health)
-            : base(pos, health)
+        public Player(Game mainGame,Vector3 pos, int health)
+            : base(mainGame,pos, health)
         {
             Initialize();
             LoadContent();
@@ -28,7 +28,12 @@ namespace Volcano
         private void LoadContent()
         {
             //load model.
+            TheModel = TheContent.Load<Model>(@"Models\cartridge_multi");
             //add model to global list of models.
+        }
+        public void UnloadContent()
+        {
+            TheContent.Unload();
         }
 
         #region IUpdateable Members

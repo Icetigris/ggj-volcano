@@ -14,8 +14,8 @@ namespace Volcano
         #region Variables
         #endregion
 
-        public Enemy(Vector3 pos, int health)
-            : base(pos, health)
+        public Enemy(Game mainGame,Vector3 pos, int health)
+            : base(mainGame,pos, health)
         {
             Initialize();
             LoadContent();
