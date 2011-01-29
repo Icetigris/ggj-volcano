@@ -19,7 +19,9 @@ namespace Volcano
         #region variables
 
         public ContentManager TheContent { get; protected set; }
-        public GraphicsDevice TheGraphics { get; private set; }
+        public GraphicsDeviceManager TheGraphics { get; private set; }
+
+        public Stage TheStage { get; private set; }
 
         public Vector3 Position { get; protected set; }
         public bool IsAlive { get; protected set; }
@@ -33,11 +35,12 @@ namespace Volcano
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Character(Game mainGame,Vector3 pos, int health)
+        public Character(MainGame mainGame,Stage stage ,Vector3 pos, int health)
             :base(mainGame)
         {
             TheContent = new ContentManager(mainGame.Services, "Content");
-            TheGraphics = mainGame.GraphicsDevice;
+            TheGraphics = mainGame.graphics;
+            TheStage = stage;
 
             Position = pos;
             Health = health;
@@ -47,6 +50,8 @@ namespace Volcano
         }
 
         public virtual void UnloadContent() { }
+
+        public virtual void Update(GameTime gameTime) { }
 
         public virtual void Draw(GameTime gameTime) { }
     }

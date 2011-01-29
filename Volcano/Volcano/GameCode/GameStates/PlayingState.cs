@@ -22,6 +22,11 @@ namespace Volcano
             rand = new Random();
         }
 
+        /// <summary>
+        /// In Playing state, we want to: (1) control the camera, (2) control options
+        /// to pause. This update maintains the options to pause.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             if (Input.WasPressed(0, Buttons.Back, Keys.Escape))
