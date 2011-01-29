@@ -10,10 +10,11 @@ namespace Volcano
     {
         public Character main { get; set; }
         public List<Character> enemies { get; private set; }
-        public Game TheGame { get; private set; }
+        public MainGame TheGame { get; private set; }
+        public PlayerCamera TheCamera { get; private set; }
         //TODO: Add map/state/thing?
 
-        public Stage(Game game) : base(game)
+        public Stage(MainGame game) : base(game)
         {
             TheGame = game;
             this.enemies = new List<Character>();
@@ -23,8 +24,16 @@ namespace Volcano
 
         private void Initialize()
         {
+            base.Initialize();
+
+            
+        }
+
+        public void LoadContent()
+        {
             //create player
-            main = new Player(TheGame, Vector3.Zero, 100);
+            main = new Player(TheGame,this, Vector3.Zero, 100);
+            TheCamera = new PlayerCamera(TheGame);
         }
 
         public void Unload()
@@ -32,6 +41,11 @@ namespace Volcano
             main.UnloadContent();
         }
 
+        public void Update(GameTime gameTime)
+        {
+            //need to update camera
+            TheCamera.Update(gameTime);
+        }
 
         public override void Draw(GameTime gameTime)
         {

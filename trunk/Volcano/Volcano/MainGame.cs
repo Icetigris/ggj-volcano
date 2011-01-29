@@ -20,10 +20,10 @@ namespace Volcano
     /// </summary>
     public class MainGame : Microsoft.Xna.Framework.Game
     {
-        private GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics { get; private set;}
         public SpriteBatch SpriteBatch;
 
-        private InputHandler input;
+        public InputHandler input { get; private set;}
         private Camera camera;
         private GameStateManager gameManager;
 
@@ -95,6 +95,7 @@ namespace Volcano
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            TheStage.LoadContent();
         }
 
         /// <summary>
@@ -119,6 +120,7 @@ namespace Volcano
                 this.Exit();
 
             // TODO: Add your update logic here
+            TheStage.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -144,7 +146,8 @@ namespace Volcano
 
         protected void ManageStateDraw(GameTime gameTime)
         {
-            if (gameManager.State == PlayingState)
+            if (gameManager.State == PlayingState ||
+                gameManager.State == PausedState)
             {
                 TheStage.Draw(gameTime);
             }
