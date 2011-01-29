@@ -160,6 +160,7 @@
   <ItemGroup>
     <Folder Include="GameCode\Attacks\" />
     <Folder Include="GameCode\Effects\" />
+    <Folder Include="GameCode\Stage\" />
     <Folder Include="GameCode\Structures\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
