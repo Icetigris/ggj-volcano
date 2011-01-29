@@ -11,7 +11,7 @@ namespace Volcano
         /// <summary>
         /// The main character.
         /// </summary>
-        public Character main { get; set; }
+        public Player main { get; set; }
 
         /// <summary>
         /// The enemies.  (No need to ever set this, since List is mutable.)

@@ -25,7 +25,7 @@ namespace Volcano
 
         public InputHandler input { get; private set;}
         private Camera camera;
-        private GameStateManager gameManager;
+        public GameStateManager gameManager;
 
         public ITitleIntroState TitleIntroState;
         public IStartMenuState StartMenuState;
@@ -40,6 +40,8 @@ namespace Volcano
 
         public Stage TheStage;
 
+        public ActiveOverlays TheHUD;
+
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -47,6 +49,7 @@ namespace Volcano
             Content.RootDirectory = "Content";
 
             TheStage = new Stage(this);
+            TheHUD = new ActiveOverlays(Services, graphics.GraphicsDevice);
 
             input = new InputHandler(this);
             Components.Add(input);
@@ -101,6 +104,7 @@ namespace Volcano
 
             // TODO: use this.Content to load your game content here
             TheStage.LoadContent();
+            TheHUD.LoadContent();
 
             //DEBUG code
             TheStage.enemies.Add(new Enemy(this, TheStage, new Vector3(500, 0, 0), 1));
@@ -129,6 +133,7 @@ namespace Volcano
 
             // TODO: Add your update logic here
             TheStage.Update(gameTime);
+            TheHUD.Update(gameTime, TheStage);
 
             base.Update(gameTime);
         }
@@ -158,6 +163,7 @@ namespace Volcano
                 gameManager.State == PausedState)
             {
                 TheStage.Draw(gameTime);
+                TheHUD.Draw(SpriteBatch, gameTime);
             }
         }
     }

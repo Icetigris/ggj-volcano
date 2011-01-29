@@ -11,7 +11,7 @@ using XELibrary;
 
 namespace Volcano
 {
-    class Player : Character
+    public class Player : Character
     {
         #region Variables
         /// <summary>        
@@ -20,6 +20,12 @@ namespace Volcano
         private Stage theStage;
 
         public InputHandler TheInput { get; private set; }
+
+        public int Pressure { get; private set; }
+        public int MaxPressure { get; private set; }
+        public int MinPressure { get; private set; }
+        public int InitialPressure { get; private set; }
+
         #endregion
 
         /// <summary>
@@ -32,6 +38,12 @@ namespace Volcano
         public Player(MainGame mainGame,Stage stage,Vector3 pos, int health)
             : base(mainGame,stage,pos, health)
         {
+            Pressure = 0;
+            InitialPressure = Pressure;
+
+            MaxPressure = 100;
+            MinPressure = 0;
+
             theStage = stage;
             Initialize(mainGame);
             LoadContent();
@@ -55,7 +67,16 @@ namespace Volcano
 
         public override void Update(GameTime gameTime)
         {
-            
+            int offset = 5;
+
+            //increase/decrease player pressure. Testing purporses.
+            if (TheInput.KeyboardState.IsKeyDown(Keys.I) &&
+                (Pressure + offset) <= MaxPressure)
+                    Pressure += offset;
+            if (TheInput.KeyboardState.IsKeyDown(Keys.O) &&
+                    (Pressure - offset) >= 0)
+                    Pressure -= offset;
+
         }
 
         public override void Draw(GameTime gameTime)

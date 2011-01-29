@@ -60,9 +60,6 @@ namespace Volcano
         {
             OurGame.SpriteBatch.DrawString(font,
                 "Playing the game ... playing the game",
-                new Vector2(20, 20), color);
-            OurGame.SpriteBatch.DrawString(font,
-                "Playing the game ... playing the game",
                 new Vector2(20, 120), Color.White);
             OurGame.SpriteBatch.DrawString(font,
                 "Playing the game ... playing the game",
