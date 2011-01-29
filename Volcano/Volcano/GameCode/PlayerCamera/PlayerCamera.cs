@@ -22,7 +22,7 @@ namespace Volcano
         private Matrix projection;
         private Matrix view;
 
-        protected Vector3 cameraPosition = new Vector3(0.0f, 0.0f, 3.0f);
+        protected Vector3 cameraPosition = new Vector3(0.0f, 600.0f, 3.0f);
         private Vector3 cameraTarget = Vector3.Zero;
         private Vector3 cameraUpVector = Vector3.Up;
 
@@ -33,6 +33,7 @@ namespace Volcano
 
         private const float spinRate = 120.0f;
         private const float moveRate = 120.0f;
+        private float theta;
 
         protected Vector3 movement = Vector3.Zero;
 
@@ -44,6 +45,7 @@ namespace Volcano
             : base(game)
         {
             input = game.input;
+            theta = 0.0f;
         }
 
         /// <summary>
@@ -55,7 +57,6 @@ namespace Volcano
             // TODO: Add your initialization code here
 
             base.Initialize();
-
             InitializeCamera();
         }
 
@@ -81,102 +82,51 @@ namespace Volcano
         {
 
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float radius = 5000.0f;
 
             if (input.KeyboardState.IsKeyDown(Keys.Left) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickLeft)) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadLeft)))
             {
-                cameraYaw += (spinRate * timeDelta);
+                theta += timeDelta;
             }
             if (input.KeyboardState.IsKeyDown(Keys.Right) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickRight)) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadRight)))
             {
-                cameraYaw -= (spinRate * timeDelta);
+                theta -= timeDelta;
             }
 
             if (input.KeyboardState.IsKeyDown(Keys.Down) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickDown)) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadDown)))
             {
-                cameraPitch -= (spinRate * timeDelta);
+                if (cameraPosition.Y >= 400.0f) cameraPosition.Y -= 200;
             }
             if (input.KeyboardState.IsKeyDown(Keys.Up) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickUp)) ||
                 (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadUp)))
             {
-                cameraPitch += (spinRate * timeDelta);
+                if (cameraPosition.Y <= 5000.0f) cameraPosition.Y += 200;
             }
 
-#if !XBOX360
-            if ((input.PreviousMouseState.X > input.MouseState.X) &&
-                (input.MouseState.LeftButton == ButtonState.Pressed))
+            if (input.KeyboardState.IsKeyDown(Keys.S))
             {
-                cameraYaw += (spinRate * timeDelta);
+                cameraYaw += 200;
             }
-            else if ((input.PreviousMouseState.X < input.MouseState.X) &&
-                (input.MouseState.LeftButton == ButtonState.Pressed))
+            if (input.KeyboardState.IsKeyDown(Keys.W))
             {
-                cameraYaw -= (spinRate * timeDelta);
+                cameraYaw -= 200;
             }
 
-            if ((input.PreviousMouseState.Y > input.MouseState.Y) &&
-                (input.MouseState.LeftButton == ButtonState.Pressed))
-            {
-                cameraPitch += (spinRate * timeDelta);
-            }
-            else if ((input.PreviousMouseState.Y < input.MouseState.Y) &&
-                (input.MouseState.LeftButton == ButtonState.Pressed))
-            {
-                cameraPitch -= (spinRate * timeDelta);
-            }
-#endif
-            //reset camera angle if needed
-            if (cameraYaw > 360)
-                cameraYaw -= 360;
-            else if (cameraYaw < 0)
-                cameraYaw += 360;
-
-            //keep camera from rotating a full 90 degrees in either direction
-            if (cameraPitch > 89)
-                cameraPitch = 89;
-            if (cameraPitch < -89)
-                cameraPitch = -89;
-
-            //update movement (none for this base class)
-            movement *= (moveRate * timeDelta);
-
-            Matrix rotationMatrix;
-            Matrix.CreateRotationY(MathHelper.ToRadians(cameraYaw), out rotationMatrix);
-
-            if (movement != Vector3.Zero)
-            {
-                Vector3.Transform(ref movement, ref rotationMatrix, out movement);
-                cameraPosition += movement;
-            }
-
-            //add in pitch to the rotation
-            rotationMatrix = Matrix.CreateRotationX(MathHelper.ToRadians(cameraPitch)) *
-                rotationMatrix;
-
-            // Create a vector pointing the direction the camera is facing.
-            Vector3 transformedReference;
-            Vector3.Transform(ref cameraReference, ref rotationMatrix,
-                out transformedReference);
-            // Calculate the position the camera is looking at.
-            Vector3.Add(ref cameraPosition, ref transformedReference, out cameraTarget);
-
-            //set our camerapos zoom component
-            float myZoom = 5000.0f;
-            cameraPosition.Z = myZoom;
-
-            //set our camerapos height component
-            float myHeight = 300.0f;
-            cameraPosition.Y = myHeight; 
+            cameraPosition.X = radius * (float)Math.Cos(theta);
+            cameraPosition.Z = radius * (float)Math.Sin(theta);
+            cameraYaw = (cameraYaw < 0.0f) ? cameraYaw : ((cameraYaw > cameraPosition.Y) ? cameraPosition.Y : cameraYaw);
+            cameraTarget.Y = cameraPosition.Y - cameraYaw;
+            Console.Out.Write("Position: {0}, {1}, {2}\n", cameraPosition.X, cameraPosition.Y, cameraPosition.Z);
 
             Matrix.CreateLookAt(ref cameraPosition, ref cameraTarget, ref cameraUpVector,
                 out view);
-
 
             base.Update(gameTime);
         }
