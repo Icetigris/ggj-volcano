@@ -13,7 +13,7 @@ namespace XELibrary
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class Camera : Microsoft.Xna.Framework.GameComponent
+    public class Camera : Microsoft.Xna.Framework.GameComponent, Microsoft.Xna.Framework.IGameComponent
     {
         protected IInputHandler input;
 

@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volcano", "Volcano\Volcano.csproj", "{4066BD6F-AABA-46F3-B41C-A958589140AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{70692F15-291E-4F6E-89B0-582F23EFDA69} = {70692F15-291E-4F6E-89B0-582F23EFDA69}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XELibrary", "XELibrary\XELibrary.csproj", "{70692F15-291E-4F6E-89B0-582F23EFDA69}"
 EndProject
@@ -15,12 +18,12 @@ Global
 		{4066BD6F-AABA-46F3-B41C-A958589140AF}.Debug|x86.Build.0 = Debug|x86
 		{4066BD6F-AABA-46F3-B41C-A958589140AF}.Release|x86.ActiveCfg = Release|x86
 		{4066BD6F-AABA-46F3-B41C-A958589140AF}.Release|x86.Build.0 = Release|x86
-		{1DAD7AF9-A1AB-472F-BAE4-8844FBCD78BB}.Debug|x86.ActiveCfg = Debug|x86
-		{1DAD7AF9-A1AB-472F-BAE4-8844FBCD78BB}.Release|x86.ActiveCfg = Release|x86
 		{70692F15-291E-4F6E-89B0-582F23EFDA69}.Debug|x86.ActiveCfg = Debug|x86
 		{70692F15-291E-4F6E-89B0-582F23EFDA69}.Debug|x86.Build.0 = Debug|x86
 		{70692F15-291E-4F6E-89B0-582F23EFDA69}.Release|x86.ActiveCfg = Release|x86
 		{70692F15-291E-4F6E-89B0-582F23EFDA69}.Release|x86.Build.0 = Release|x86
+		{1DAD7AF9-A1AB-472F-BAE4-8844FBCD78BB}.Debug|x86.ActiveCfg = Debug|x86
+		{1DAD7AF9-A1AB-472F-BAE4-8844FBCD78BB}.Release|x86.ActiveCfg = Release|x86
 		{86A66BDD-7619-4499-BA6E-8B49D40CE1EF}.Debug|x86.ActiveCfg = Debug|x86
 		{86A66BDD-7619-4499-BA6E-8B49D40CE1EF}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection

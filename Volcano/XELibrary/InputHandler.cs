@@ -29,7 +29,7 @@ namespace XELibrary
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class InputHandler : Microsoft.Xna.Framework.GameComponent, IInputHandler
+    public class InputHandler : Microsoft.Xna.Framework.GameComponent, IInputHandler, Microsoft.Xna.Framework.IGameComponent
     {
         private KeyboardHandler keyboard;
         private ButtonHandler gamePadHandler = new ButtonHandler();
