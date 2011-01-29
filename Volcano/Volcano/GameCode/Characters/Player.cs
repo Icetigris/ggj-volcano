@@ -32,7 +32,7 @@ namespace Volcano
         public Player(MainGame mainGame,Stage stage,Vector3 pos, int health)
             : base(mainGame,stage,pos, health)
         {
-            theStage = s;
+            theStage = stage;
             Initialize(mainGame);
             LoadContent();
         }

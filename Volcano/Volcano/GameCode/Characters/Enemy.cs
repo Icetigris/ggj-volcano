@@ -15,6 +15,7 @@ namespace Volcano
         /// <summary>
         /// The stage.
         /// </summary>
+        Stage theStage;
         #endregion
 
         public Enemy(MainGame mainGame,Stage stage,Vector3 pos, int health)
