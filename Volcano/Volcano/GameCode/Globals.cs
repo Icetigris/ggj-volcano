@@ -14,6 +14,7 @@ namespace Volcano
         public static int numLights = 0;
         public static int maxLights = 4;
         public static Lights[] lights;
+        public static Vector3 topOfVolcano = new Vector3(0, 500, 0); //This is a guess.
 
         public static Vector2 PointOnRadius(float radius, float theta)
         {

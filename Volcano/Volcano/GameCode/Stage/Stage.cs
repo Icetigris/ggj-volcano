@@ -71,6 +71,8 @@ namespace Volcano
                 float theta = (float) rand.NextDouble() * MathHelper.TwoPi;
                 this.structures.Add(new Hut(TheGame, this, Globals.PointOnRadius(radius, theta), 50.0, 50.0));
             }
+
+            this.structures.Add(new Hut(TheGame, this, new Vector2(0, 400), 50.0, 50.0));
         }
 
         public new void LoadContent()

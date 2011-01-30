@@ -105,7 +105,7 @@ namespace Volcano
 
             if (DrawQ1 || DrawQ2 || DrawQ3 || DrawQ4)
             {
-                var LengthOfAttack = 0.8f;
+                var LengthOfAttack = 0.8f; //OK WHO USED VAR?!
                 if (TheDrawTimer.TargetTimeSeconds(LengthOfAttack))
                 {
                     DrawQ1 = false;

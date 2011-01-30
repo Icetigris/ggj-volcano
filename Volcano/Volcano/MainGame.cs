@@ -108,6 +108,7 @@ namespace Volcano
             TheStage.LoadContent();
             TheHUD.LoadContent();
 
+
             //DEBUG code
             TheStage.enemies.Add(new Enemy(this, TheStage, new Vector3(1400, 700, 0), 1));
         }

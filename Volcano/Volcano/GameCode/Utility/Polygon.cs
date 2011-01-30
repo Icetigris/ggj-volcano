@@ -93,6 +93,25 @@ namespace Volcano
         /// End of the line.  (EERYBODY OFF!)
         /// </summary>
         public Vector2 End;
+
+        public double Magnitude
+        {
+            get
+            {
+                return (End - Start).Length();
+            }
+        }
+
+        public Vector2 UnitVector
+        {
+            get
+            {
+                Vector2 retVal = (End - Start);
+                retVal.X /= (float)Magnitude;
+                retVal.Y /= (float)Magnitude;
+                return retVal;
+            }
+        }
     }
 
 }
