@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using System.IO;
 
-namespace GameJam_Library
+namespace Volcano
 {
     /// <summary>
     /// Timer class for easy use of timers. Things such as stopwatches
