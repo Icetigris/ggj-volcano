@@ -12,9 +12,9 @@ namespace Volcano
 {
     class Hut : Strucure
     {
-        private static float SPAWN_AREA_X = 2;
-        private static float SPAWN_AREA_Y = 2;
-        private static float SPAWN_DELAY = 4;
+        private static float SPAWN_AREA_X = 100;
+        private static float SPAWN_AREA_Y = 100;
+        private static float SPAWN_DELAY = 7.5;
         private static int ENEMY_SPAWN_HP = 1;
 
         public Stage TheStage { get; private set; }
@@ -44,7 +44,6 @@ namespace Volcano
 
         public override void Draw(GameTime gameTime)
         {
-
             Draw_CustomEffect(gameTime);
 
             //Game structure needs huts to work, just fuck drawing them
@@ -246,7 +245,7 @@ namespace Volcano
 
         public Vector2 FindSpawnPosition(GameTime seed)
         {
-            Random rand = new Random(seed.TotalRealTime.Milliseconds);
+            Random rand = new Random();
             Vector2 spawnPoint = new Vector2();
             for (int i = 0; i < 10; i++)
             {
