@@ -84,6 +84,8 @@ vertOut_MultipleLights Phong_MultipleLights_VS(
 	
 	if(gIsTiki)
 		vOut.posH = mul(float4(in_posL * 7.0f,1.0f), gWVP);
+	else if(gIsHut)
+		vOut.posH = mul(float4(in_posL * 1.0f,1.0f), gWVP);
 	else
 		vOut.posH = mul(float4(in_posL,1.0f), gWVP);
 		
