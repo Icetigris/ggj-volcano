@@ -10,7 +10,6 @@ namespace Volcano
 {
     class Globals
     {
-        public static Dictionary<Model, Model> convertedModels = new Dictionary<Model, Model>();
         
         public static int numLights = 0;
         public static int maxLights = 4;

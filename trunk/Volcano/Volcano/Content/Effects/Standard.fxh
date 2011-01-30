@@ -43,6 +43,11 @@ uniform extern float  gSpecularPower;
 //-------------------------
 uniform extern float  gTime;
 
+//-------------------------
+// Volcano stuff
+//-------------------------
+uniform extern float  gIsTiki;
+
 
 //-------------------------
 // Colorshift Values

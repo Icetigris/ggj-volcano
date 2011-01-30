@@ -136,6 +136,8 @@ float4 Phong_MultipleLights_PS(vertOut_MultipleLights IN) : COLOR
 	float4 diffuseTex = diffuse * texColor;
 	
 	
+	
+	
 	return float4(diffuseTex.rgb + ambient + spec, texColor.a);
 }
 

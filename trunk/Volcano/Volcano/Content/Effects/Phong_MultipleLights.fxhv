@@ -81,9 +81,13 @@ vertOut_MultipleLights Phong_MultipleLights_VS(
 	vertOut_MultipleLights vOut = (vertOut_MultipleLights)0;
 	vOut.normalW = mul(float4(in_normalL,1.0f), gWIT).xyz;
 	vOut.posW  = mul(float4(in_posL, 1.0f), gWorld).xyz;
-	vOut.posH = mul(float4(in_posL,1.0f), gWVP);
-	vOut.tex0 = in_tex0;
 	
+	if(gIsTiki)
+		vOut.posH = mul(float4(in_posL * 10.0f,1.0f), gWVP);
+	else
+		vOut.posH = mul(float4(in_posL,1.0f), gWVP);
+		
+	vOut.tex0 = in_tex0;
 	
 	float3 LightPos_multiple[maxLights];
 	LightPos_multiple[0] = gLightPos_multiple_1;
