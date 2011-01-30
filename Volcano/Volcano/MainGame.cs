@@ -27,6 +27,10 @@ namespace Volcano
         private Camera camera;
         public GameStateManager gameManager;
 
+        public AudioEngine audioEngine;
+        public SoundBank soundBank;
+        public WaveBank waveBank;
+
         public ITitleIntroState TitleIntroState;
         public IStartMenuState StartMenuState;
         public IOptionsMenuState OptionsMenuState;
@@ -53,6 +57,11 @@ namespace Volcano
             TheStage = new Stage(this);
             TheHUD = new ActiveOverlays(Services, graphics.GraphicsDevice);
 
+            audioEngine = new AudioEngine(@"Content\Sound\ggj-volcano.xgs");
+            soundBank = new SoundBank(audioEngine, @"Content\Sound\Sound Bank.xsb");
+            waveBank = new WaveBank(audioEngine, @"Content\Sound\Wave Bank.xwb");
+            Globals.sounds = soundBank;
+
             input = new InputHandler(this);
             Components.Add(input);
 
@@ -61,6 +70,7 @@ namespace Volcano
 
             gameManager = new GameStateManager(this);
             Components.Add(gameManager);
+            Globals.gameManager = gameManager;
 
             TitleIntroState = new TitleIntroState(this);
             StartMenuState = new StartMenuState(this);
@@ -74,6 +84,7 @@ namespace Volcano
             YesNoDialogState = new YesNoDialogState(this);
 
             gameManager.ChangeState(TitleIntroState.Value);
+            Globals.sounds.PlayCue("Polynesia1");
         }
 
         /// <summary>
