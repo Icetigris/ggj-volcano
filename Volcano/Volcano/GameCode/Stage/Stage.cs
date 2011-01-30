@@ -52,8 +52,14 @@ namespace Volcano
         private new void Initialize()
         {
             base.Initialize();
+            Random rand = new Random();
+            float radius = rand.Next(500, 1000);
 
-            
+            for (int i = 0; i < (new Random()).Next(5, 10); i++)
+            {
+                float theta = (float) rand.NextDouble() * MathHelper.TwoPi;
+                this.structures.Add(new Hut(TheGame, this, Globals.PointOnRadius(radius, theta), 50.0, 50.0));
+            }
         }
 
         public new void LoadContent()

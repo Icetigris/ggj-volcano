@@ -37,6 +37,8 @@ namespace Volcano
             b = center + new Vector2((float)-width / 2, (float)height / 2);
             c = center + new Vector2((float)-width / 2, (float)-height / 2);
             d = center + new Vector2((float)width / 2, (float)-height / 2);
+
+            hitArea = new Polygon();
             hitArea.Lines.Add(new Line(a, b));
             hitArea.Lines.Add(new Line(b, c));
             hitArea.Lines.Add(new Line(c, d));

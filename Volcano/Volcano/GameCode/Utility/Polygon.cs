@@ -16,6 +16,11 @@ namespace Volcano
         /// </summary>
         public List<Line> Lines { get; set; }
 
+        public Polygon()
+        {
+            Lines = new List<Line>();
+        }
+
         /// <summary>
         /// Tests if a line hits the polygon.
         /// </summary>
