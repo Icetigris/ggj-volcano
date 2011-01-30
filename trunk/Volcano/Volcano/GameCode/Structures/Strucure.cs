@@ -15,8 +15,6 @@ namespace Volcano
         /// </summary>
         public int hp { get; private set; }
 
-        public GraphicsDeviceManager TheGraphics { get; private set; }
-
         /// <summary>
         /// Hit area of building.
         /// </summary>
@@ -41,15 +39,11 @@ namespace Volcano
         public Strucure(MainGame game, Vector2 center, double width, double height)
             : base(game)
         {
-<<<<<<< .mine
             TheGraphics = game.graphics;
-=======
             TheGame = game;
             TheContent = new ContentManager(game.Services, "Content");
             TheGraphics = game.graphics;
             TheRotation = Matrix.Identity;
-
->>>>>>> .r48
             this.center = center;
             Vector2 a, b, c, d;
             a = center + new Vector2((float)width / 2, (float)height / 2);
@@ -63,6 +57,8 @@ namespace Volcano
             hitArea.Lines.Add(new Line(c, d));
             hitArea.Lines.Add(new Line(d, a));
         }
+
+        public abstract void LoadContent();
 
         public abstract override void Draw(GameTime gameTime);
 
