@@ -141,7 +141,7 @@ namespace Volcano
 
                         Matrix TheRotation = Matrix.CreateRotationX(1.57079633f);
                         Matrix world = ThePlayer.TheRotation * transforms[mesh.ParentBone.Index] *
-                            Matrix.CreateTranslation(new Vector3(ThePlayer.Position.X, ThePlayer.Position.Y, ThePlayer.Position.Z + 1000));
+                            Matrix.CreateTranslation(new Vector3(ThePlayer.Position.X, ThePlayer.Position.Y + 250, ThePlayer.Position.Z + 1000));
 
                         //DrawModel_Effect(TheModel, transforms, world, projection, "MultipleLights");
                         DrawModel_Effect(TempModel, transforms, world, projection, gameTime, "LavaAttack_Light");

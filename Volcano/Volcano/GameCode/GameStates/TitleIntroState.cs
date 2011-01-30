@@ -34,8 +34,9 @@ namespace Volcano
 
         public override void Draw(GameTime gameTime)
         {
-            Vector2 pos = new Vector2(TitleSafeArea.Left, TitleSafeArea.Top);
-            OurGame.SpriteBatch.Draw(texture, pos, Color.White);
+            Rectangle rect = new Rectangle(0, 0, GraphicsDevice.PresentationParameters.BackBufferWidth,
+                GraphicsDevice.PresentationParameters.BackBufferHeight);
+            OurGame.SpriteBatch.Draw(texture, rect, Color.White);
 
             base.Draw(gameTime);
         }
