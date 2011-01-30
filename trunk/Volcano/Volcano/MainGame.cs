@@ -45,6 +45,8 @@ namespace Volcano
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 680;
             
             Content.RootDirectory = "Content";
 
