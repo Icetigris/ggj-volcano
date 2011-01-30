@@ -101,6 +101,12 @@ namespace Volcano
 
             foreach (Strucure s in structures)
                 s.LoadContent();
+
+            //DEBUG
+            this.enemies.Add(new Enemy(TheGame, this, new Vector3(200, 10, 200), 1));
+            this.enemies.Add(new Enemy(TheGame, this, new Vector3(-200, 10, 200), 1));
+            this.enemies.Add(new Enemy(TheGame, this, new Vector3(200, 10, -200), 1));
+            this.enemies.Add(new Enemy(TheGame, this, new Vector3(-200, 10, -200), 1));
         }
 
         public void Unload()
@@ -117,10 +123,19 @@ namespace Volcano
             main.Update(gameTime);
 
             TheCollisionManager.Update(gameTime);
+            TheCollisionManager.ManageCollisions();
 
             //and all the enemies
             foreach (Enemy e in enemies)
                 e.Update(gameTime);
+
+            List<Enemy> temp = new List<Enemy>();
+            foreach (Enemy e in enemies)
+                temp.Add(e);
+
+            foreach (Enemy e in temp)
+                if (e.Health <= 0)
+                    enemies.Remove(e);
 
             //and all the attacks
             foreach (Attack a in attacks)
