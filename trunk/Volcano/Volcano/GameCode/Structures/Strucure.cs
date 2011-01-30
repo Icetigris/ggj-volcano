@@ -28,8 +28,9 @@ namespace Volcano
         public Model TheModel { get; protected set; }
         public Matrix TheRotation { get; protected set; }
         public ContentManager TheContent { get; protected set; }
-        public GraphicsDeviceManager TheGraphics { get; private set; }
         protected MainGame TheGame;
+
+        public GraphicsDeviceManager TheGraphics;
 
         /// <summary>
         /// Make a new structure.

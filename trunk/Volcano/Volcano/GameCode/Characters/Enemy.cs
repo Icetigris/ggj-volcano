@@ -11,7 +11,7 @@ namespace Volcano
 {
     class Enemy : Character
     {
-        private static float MOVE_SPEED = 1;
+        private static float MOVE_SPEED = 50;
 
         #region Variables
         /// <summary>
