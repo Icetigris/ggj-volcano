@@ -39,12 +39,10 @@ namespace Volcano
         /// </summary>
         public PlayerCamera TheCamera { get; private set; }
 
-        /// <summary>
-        /// The game.  (You just lost.)
-        /// </summary>
         public MainGame TheGame { get; private set; }
         //TODO: Add map/state/thing?
 
+        bool doOnce = true;
         public Texture2D TheBackground { get; private set; }
 
 
@@ -82,7 +80,7 @@ namespace Volcano
             //create player
             main = new Player(TheGame, this, Vector3.Zero, 100);
             TheCamera = new PlayerCamera(TheGame);
-            Globals.lights = new Lights[Globals.maxLights];
+            Globals.lights = new Lights[Globals.maxLights];           
 
             Lights.AddLight(new Lights(
                            new Vector3(4000.0f, 200.0f, 0.0f),
@@ -114,6 +112,11 @@ namespace Volcano
 
         public override void Update(GameTime gameTime)
         {
+            if (TheGame.gameManager.State.Value == TheGame.PlayingState && doOnce)
+            {
+                Globals.sounds.PlayCue("LavaBubbles");
+                doOnce = false;
+            }
             //need to update camera
             TheCamera.Update(gameTime);
 

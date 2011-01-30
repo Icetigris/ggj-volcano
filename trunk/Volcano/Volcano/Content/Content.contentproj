@@ -170,6 +170,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
+    <Compile Include="Sound\ggj-volcano.xap">
+      <Name>ggj-volcano</Name>
+      <Importer>XactImporter</Importer>
+      <Processor>XactProcessor</Processor>
+    </Compile>
     <Compile Include="Models\longhouse.FBX">
       <Name>longhouse</Name>
       <Importer>FbxImporter</Importer>
@@ -211,6 +216,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Textures\PlaneTex.png">
+      <Name>PlaneTex</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Textures\VolcanoTex.png">
       <Name>VolcanoTex</Name>
       <Importer>TextureImporter</Importer>
@@ -220,13 +230,6 @@
   <ItemGroup>
     <Compile Include="Textures\sky.png">
       <Name>sky</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Textures\PlaneTex.png">
-      <Name>PlaneTex</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
