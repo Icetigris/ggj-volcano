@@ -11,6 +11,8 @@ namespace Volcano
     /// </summary>
     public abstract class Attack : DrawableGameComponent
     {
+        public Character TheCharacter { get; private set; }
+
         /// <summary>
         /// Creates a new Attack.
         /// </summary>
