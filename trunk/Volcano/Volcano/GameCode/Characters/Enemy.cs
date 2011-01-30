@@ -22,12 +22,16 @@ namespace Volcano
         private CustomEffects visualEffect;
         #endregion
 
+        Rock ARock;
+
         public Enemy(MainGame mainGame,Stage stage,Vector3 pos, int health)
             : base(mainGame,stage,pos, health)
         {
             theStage = stage;
             Initialize();
             LoadContent();
+            ARock = new Rock(mainGame, stage);
+            ARock.Position = this.Position;
         }
 
         public override void Initialize()
@@ -57,6 +61,7 @@ namespace Volcano
         public override void Draw(GameTime gameTime)
         {
             Draw_CustomEffect(gameTime);
+            ARock.Draw(gameTime);
         }
 
         public override void Update(GameTime gameTime)
@@ -77,6 +82,8 @@ namespace Volcano
             }
 
             TheAabb.Update(gameTime);
+
+            ARock.Draw(gameTime);
             
             //Since we're not really doing anything here...
             base.Update(gameTime);
