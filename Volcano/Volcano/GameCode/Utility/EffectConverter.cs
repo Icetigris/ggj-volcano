@@ -14,7 +14,7 @@ namespace Volcano
         /// Alters a model so it will draw using a custom effect, while preserving
         /// whatever textures were set on it as part of the original effects.
         /// </summary>
-        public static void ChangeEffectUsedByModel(Model model, Effect replacementEffect)
+        public static void ChangeEffectUsedByModel(Stage stage,Model model, Effect replacementEffect)
         {
             // Table mapping the original effects to our replacement versions.
             Dictionary<Effect, Effect> effectMapping = new Dictionary<Effect, Effect>();
@@ -23,7 +23,7 @@ namespace Volcano
             {
                 // Scan over all the effects currently on the mesh.
 
-                if (!Globals.convertedModels.ContainsKey(model))
+                if (!stage.convertedModels.ContainsKey(model))
                 {
                     foreach (BasicEffect oldEffect in mesh.Effects)
                     {
@@ -50,7 +50,7 @@ namespace Volcano
                     {
                         meshPart.Effect = effectMapping[meshPart.Effect];
                     }
-                    Globals.convertedModels.Add(model, model);
+                    stage.convertedModels.Add(model, model);
 
                     //System.Console.WriteLine("Model converted!");
 

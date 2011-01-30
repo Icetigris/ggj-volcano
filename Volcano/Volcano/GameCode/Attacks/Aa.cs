@@ -62,10 +62,10 @@ namespace Volcano
             visualEffect.MondoEffect = ThePlayer.TheContent.Load<Effect>(@"Effects\MondoEffect");
 
             //Convert models using custom effects.
-            CustomEffects.ChangeEffectUsedByModel(TheQ1, visualEffect.MondoEffect);
-            CustomEffects.ChangeEffectUsedByModel(TheQ2, visualEffect.MondoEffect);
-            CustomEffects.ChangeEffectUsedByModel(TheQ3, visualEffect.MondoEffect);
-            CustomEffects.ChangeEffectUsedByModel(TheQ4, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel(ThePlayer.TheStage,TheQ1, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel(ThePlayer.TheStage,TheQ2, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel(ThePlayer.TheStage,TheQ3, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel(ThePlayer.TheStage,TheQ4, visualEffect.MondoEffect);
 
             TheDrawTimer = new Timer();
         }

@@ -65,7 +65,7 @@ namespace Volcano
                 "Playing the game ... playing the game",
                 new Vector2(20, 220), Color.Red);
 
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
 
         protected override void StateChanged(object sender, EventArgs e)

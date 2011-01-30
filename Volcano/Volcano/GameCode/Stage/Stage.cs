@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Volcano
 {
@@ -28,6 +31,9 @@ namespace Volcano
         /// </summary>
         public List<Strucure> structures { get; private set; }
 
+
+        public CollisionManager TheCollisionManager { get; set; }
+
         /// <summary>
         /// The camera.
         /// </summary>
@@ -39,12 +45,17 @@ namespace Volcano
         public MainGame TheGame { get; private set; }
         //TODO: Add map/state/thing?
 
+
+        public Dictionary<Model, Model> convertedModels { get; set; }
+
         public Stage(MainGame game) : base(game)
         {
             TheGame = game;
             this.enemies = new List<Character>();
             this.attacks = new List<Attack>();
             this.structures = new List<Strucure>();
+            TheCollisionManager = new CollisionManager(this);
+            convertedModels =  new Dictionary<Model, Model>();
 
             Initialize();
         }
@@ -99,6 +110,8 @@ namespace Volcano
 
             //and the main
             main.Update(gameTime);
+
+            TheCollisionManager.Update(gameTime);
 
             //and all the enemies
             foreach (Enemy e in enemies)

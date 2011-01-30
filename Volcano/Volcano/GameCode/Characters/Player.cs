@@ -19,10 +19,6 @@ namespace Volcano
         /// </summary>
         private Stage theStage;
 
-        //temporarytemporarytemporarytemporary
-        public Texture2D TheLavaTex { get; private set; }
-        public Model TheQ1 { get; private set; }
-        //endendendendendendendendendendendend
 
         private CustomEffects visualEffect;
 
@@ -74,7 +70,7 @@ namespace Volcano
             visualEffect.MondoEffect = TheContent.Load<Effect>(@"Effects\MondoEffect");
 
             //Convert models using custom effects.
-            CustomEffects.ChangeEffectUsedByModel(TheModel, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel(TheStage,TheModel, visualEffect.MondoEffect);
 
             TheAa.LoadContent();
 
@@ -121,8 +117,6 @@ namespace Volcano
             Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
                 aspectRatio, 1.0f, 10000.0f);
             Matrix view = Matrix.CreateLookAt(new Vector3(0.0f, 50.0f, myZoom), Vector3.Zero, Vector3.Up);
-
-
 
             foreach (ModelMesh mesh in TheModel.Meshes)
             {
@@ -236,7 +230,6 @@ namespace Volcano
                 mesh.Draw();
             }
         }
-
 
 
     }

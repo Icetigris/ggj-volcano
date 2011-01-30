@@ -94,6 +94,8 @@
     <Compile Include="GameCode\Characters\Character.cs" />
     <Compile Include="GameCode\Characters\Enemy.cs" />
     <Compile Include="GameCode\Characters\Player.cs" />
+    <Compile Include="GameCode\Collision\Aabb.cs" />
+    <Compile Include="GameCode\Collision\CollisionManager.cs" />
     <Compile Include="GameCode\Effects\CustomEffect.cs" />
     <Compile Include="GameCode\GameStates\BaseGameState.cs" />
     <Compile Include="GameCode\GameStates\FadingState.cs" />
