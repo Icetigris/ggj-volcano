@@ -31,6 +31,13 @@ namespace Volcano
 
         public Aa TheAa { get; private set; }
 
+        public Texture2D TheTexture { get; private set; }
+        public Texture2D ThePlaneTexture { get; private set; }
+
+        public Model ThePlaneModel { get; private set; }
+
+        public bool IsThePlane { get; private set; }
+
         #endregion
 
         /// <summary>
@@ -59,18 +66,24 @@ namespace Volcano
             //get our input manager...
             TheInput = mainGame.input;
             TheAa = new Aa(mainGame, this);
+            IsThePlane = false;
         }
         protected override void LoadContent()
         {
             //load model.
             TheModel = TheContent.Load<Model>(@"Models\volcano");
+            ThePlaneModel = TheContent.Load<Model>(@"Models\tinyplane");
+
+            TheTexture = TheContent.Load<Texture2D>(@"Textures\VolcanoTex");
+            ThePlaneTexture = TheContent.Load<Texture2D>(@"Textures\PlaneTex");
 
             //create custom effect
             visualEffect = new CustomEffects();
             visualEffect.MondoEffect = TheContent.Load<Effect>(@"Effects\MondoEffect");
 
             //Convert models using custom effects.
-            CustomEffects.ChangeEffectUsedByModel(TheStage,TheModel, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel(TheStage, TheModel, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel(TheStage, ThePlaneModel, visualEffect.MondoEffect);
 
             TheAa.LoadContent();
 
@@ -106,7 +119,10 @@ namespace Volcano
         {
             //Draw_BasicEffect(gameTime);
 
-            Draw_CustomEffect(gameTime);
+            IsThePlane = false;
+            Draw_CustomEffect(gameTime, TheModel);
+            IsThePlane = true;
+            Draw_CustomEffect(gameTime, ThePlaneModel);
             TheAa.Draw(gameTime);
         }
 
@@ -140,7 +156,7 @@ namespace Volcano
             }
         }
 
-        private void Draw_CustomEffect(GameTime gameTime)
+        private void Draw_CustomEffect(GameTime gameTime, Model ourModel)
         {
 
             visualEffect.Init();
@@ -154,17 +170,23 @@ namespace Volcano
                 Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
                     aspectRatio, 1.0f, 1000000.0f);
 
-                foreach (ModelMesh mesh in TheModel.Meshes)
+                foreach (ModelMesh mesh in ourModel.Meshes)
                 {
                     visualEffect.Set_Phong_Diffuse(new Vector3(1.0f, 1.0f, 1.0f), Vector4.One);
                     visualEffect.Set_Phong_Ambient(Vector4.One, new Vector4(0.1f, 0.1f, 0.1f, 1.0f));
                     visualEffect.Set_Phong_Specular(new Vector4(0.8f, 0.8f, 0.8f, 1.0f), Vector4.One, 20.0f);
 
                     TheRotation = Matrix.CreateRotationX(1.57079633f);
-                    Matrix world = TheRotation * transforms[mesh.ParentBone.Index] * 
-                        Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, Position.Z + 1000));
 
-                    DrawModel_Effect(TheModel, transforms, world, projection, gameTime,"MultipleLights");
+                    Matrix world;
+                    if(!IsThePlane)
+                        world = TheRotation * transforms[mesh.ParentBone.Index] * 
+                            Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, Position.Z + 1000));
+                    else
+                        world = TheRotation * transforms[mesh.ParentBone.Index] * 
+                            Matrix.CreateTranslation(new Vector3(Position.X, Position.Y - 2000, Position.Z + 1000));
+
+                    DrawModel_Effect(ourModel, transforms, world, projection, gameTime, "MultipleLights");
                 }
             }
         }
@@ -201,8 +223,17 @@ namespace Volcano
                     effect.Parameters["gEyePosW"].SetValue(TheStage.TheCamera.Position);
 
                     effect.Parameters["gNumLights"].SetValue(Globals.numLights);
-                    //effect.Parameters["gTex"].SetValue(the);
-                    //effect.Parameters["gTime"].SetValue(visualEffect.Update_Time(gameTime));
+
+                    if (!IsThePlane)
+                    {
+                        effect.Parameters["gIsVolcano"].SetValue(true);
+                        effect.Parameters["gTex"].SetValue(TheTexture);
+                    }
+                    if (IsThePlane)
+                    {
+                        effect.Parameters["gIsPlane"].SetValue(true);
+                        effect.Parameters["gTex"].SetValue(ThePlaneTexture);
+                    }
 
                     String parameter;
                     for (int v = 0; v < Globals.numLights; v++)

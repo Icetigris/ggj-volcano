@@ -45,6 +45,8 @@ namespace Volcano
         public MainGame TheGame { get; private set; }
         //TODO: Add map/state/thing?
 
+        public Texture2D TheBackground { get; private set; }
+
 
         public Dictionary<Model, Model> convertedModels { get; set; }
 
@@ -87,7 +89,7 @@ namespace Volcano
                            new Vector4(1.0f),
                            new Vector4(1.0f),
                            new Vector4(1.0f),
-                           new Vector4(1.0f, 0.0f, 0.0f, 1.0f),
+                           new Vector4(0.3f, 0.0470588f, 0.0f, 1.0f),
                            new Vector4(1.0f))
                        );
             Lights.AddLight(new Lights(
@@ -95,18 +97,14 @@ namespace Volcano
                            new Vector4(1.0f),
                            new Vector4(1.0f),
                            new Vector4(1.0f),
-                           new Vector4(0.6f, 0.6f, 0.6f, 1.0f),
+                           new Vector4(0.3f, 0.3f, 0.3f, 1.0f),
                            new Vector4(1.0f))
                        );
 
+            TheBackground = TheGame.Content.Load<Texture2D>(@"Textures\sky");
+
             foreach (Strucure s in structures)
                 s.LoadContent();
-
-            //DEBUG
-            this.enemies.Add(new Enemy(TheGame, this, new Vector3(200, 10, 200), 1));
-            this.enemies.Add(new Enemy(TheGame, this, new Vector3(-200, 10, 200), 1));
-            this.enemies.Add(new Enemy(TheGame, this, new Vector3(200, 10, -200), 1));
-            this.enemies.Add(new Enemy(TheGame, this, new Vector3(-200, 10, -200), 1));
         }
 
         public void Unload()
@@ -150,6 +148,13 @@ namespace Volcano
         {
             //TODO: Draw the map and volcano
             // - Isn't this just the player?  ~Ben
+
+            TheGame.SpriteBatch.Begin();
+            Rectangle rect = new Rectangle(0, 0, TheGame.GraphicsDevice.PresentationParameters.BackBufferWidth,
+                TheGame.GraphicsDevice.PresentationParameters.BackBufferHeight);
+            TheGame.SpriteBatch.Draw(TheBackground, rect, Color.White);
+
+            TheGame.SpriteBatch.End();
 
             //draw player
             main.Draw(gameTime);

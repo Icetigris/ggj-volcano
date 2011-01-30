@@ -14,7 +14,7 @@ namespace Volcano
     {
         private static float SPAWN_AREA_X = 100;
         private static float SPAWN_AREA_Y = 100;
-        private static float SPAWN_DELAY = 7.5f;
+        private static float SPAWN_DELAY = 1.5f;
         private static int ENEMY_SPAWN_HP = 1;
 
         public Stage TheStage { get; private set; }
@@ -238,7 +238,7 @@ namespace Volcano
             visualEffect.MondoEffect = TheContent.Load<Effect>(@"Effects\MondoEffect");
 
             //Convert models using custom effects.
-            CustomEffects.ChangeEffectUsedByModel(TheStage, TheModel, visualEffect.MondoEffect);
+            CustomEffects.ChangeEffectUsedByModel_Textured(TheStage, TheModel, visualEffect.MondoEffect);
         }
 
         public Vector2 FindSpawnPosition(GameTime seed)
