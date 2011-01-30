@@ -94,6 +94,7 @@
     <Compile Include="GameCode\Characters\Character.cs" />
     <Compile Include="GameCode\Characters\Enemy.cs" />
     <Compile Include="GameCode\Characters\Player.cs" />
+    <Compile Include="GameCode\Effects\CustomEffect.cs" />
     <Compile Include="GameCode\GameStates\BaseGameState.cs" />
     <Compile Include="GameCode\GameStates\FadingState.cs" />
     <Compile Include="GameCode\GameStates\GameStateInterface.cs" />
@@ -172,9 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameCode\Effects\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

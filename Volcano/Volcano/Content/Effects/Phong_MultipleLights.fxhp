@@ -1,0 +1,142 @@
+/* Phong_MultipleLights.fxhp
+ * 
+ * 
+ */
+
+#ifndef _PS_PHONG_MULTIPLELIGHTS_FXH_
+#define _PS_PHONG_MULTIPLELIGHTS_FXH_
+
+#include "Standard.fxh"
+
+#ifndef MaxLights
+#define maxLights 3
+#endif
+
+#ifndef distanceScaleMainLight
+#define distanceScaleMainLight 0.00000002f;
+#endif
+
+#ifndef distanceScale
+#define distanceScale 0.00002f;
+#endif
+
+#ifndef attenMax
+#define attenMax 500.0f
+#endif
+
+#ifndef attenFactor
+#define attenFactor 0.002f
+#endif
+
+//multiple light system
+#ifndef _MULTIPLE_LIGHT_SYSTEM_
+#define _MULTIPLE_LIGHT_SYSTEM_
+uniform extern int gNumLights; 
+float3 gLightPos_multiple[maxLights];
+
+float4 gDiffuseMtrl_multiple[maxLights];
+float4 gDiffuseLight_multiple[maxLights];
+
+float4 gSpecularMtrl_multiple[maxLights];
+float4 gSpecularLight_multiple[maxLights];
+
+uniform extern float3 gLightPos_multiple_1;
+uniform extern float4 gDiffuseMtrl_multiple_1;
+uniform extern float4 gDiffuseLight_multiple_1;
+uniform extern float4 gSpecularMtrl_multiple_1;
+uniform extern float4 gSpecularLight_multiple_1;
+
+uniform extern float3 gLightPos_multiple_2;
+uniform extern float4 gDiffuseMtrl_multiple_2;
+uniform extern float4 gDiffuseLight_multiple_2;
+uniform extern float4 gSpecularMtrl_multiple_2;
+uniform extern float4 gSpecularLight_multiple_2;
+
+uniform extern float3 gLightPos_multiple_3;
+uniform extern float4 gDiffuseMtrl_multiple_3;
+uniform extern float4 gDiffuseLight_multiple_3;
+uniform extern float4 gSpecularMtrl_multiple_3;
+uniform extern float4 gSpecularLight_multiple_3;
+#endif //#ifndef _MULTIPLE_LIGHT_SYSTEM_
+
+#ifndef _VERTOUT_MULTIPLELIGHTS_
+#define _VERTOUT_MULTIPLELIGHTS_
+/* data passed from vertex shader to pixel shader */
+struct vertOut_MultipleLights{
+    float4 posH    : POSITION0;
+    float2 tex0    : TEXCOORD0;
+    float3 normalW : TEXCOORD1;
+    float3 posW    : TEXCOORD2;
+    float3 toEye    : TEXCOORD3;
+    float3 intensity   : TEXCOORD4;
+    float3 lightDir[maxLights]   : TEXCOORD5;
+};
+#endif //#ifndef _VERTOUT_MULTIPLELIGHTS_
+
+float4 Phong_MultipleLights_PS(vertOut_MultipleLights IN) : COLOR
+{
+	IN.normalW = normalize(IN.normalW);
+	//=======================================================
+	// Lighting
+
+	float3 ambient = gAmbientMtrl*gAmbientLight;
+	float3 toEye = normalize(gEyePosW - IN.posW);
+	
+	float3 r = float3(0.0f,0.0f,0.0f);
+	float t = 0.0f;
+	float s = 0.0f;
+
+	float3 spec = float3(0.0f,0.0f,0.0f);
+	float4 diffuse = float4(0.0f,0.0f,0.0f,0.0f);
+	
+	//=======================================================
+	// Multiple Lights!
+	
+	float LightIntensity_multiple[maxLights];
+	LightIntensity_multiple[0] = IN.intensity.x;
+	LightIntensity_multiple[1] = IN.intensity.y;
+	LightIntensity_multiple[2] = IN.intensity.z;
+	
+	gSpecularMtrl_multiple[0] = gSpecularMtrl_multiple_1;
+	gSpecularMtrl_multiple[1] = gSpecularMtrl_multiple_2;
+	gSpecularMtrl_multiple[2] = gSpecularMtrl_multiple_3;
+	
+	gSpecularLight_multiple[0] = gSpecularLight_multiple_1;
+	gSpecularLight_multiple[1] = gSpecularLight_multiple_2;
+	gSpecularLight_multiple[2] = gSpecularLight_multiple_3;
+	
+	gDiffuseMtrl_multiple[0] = gDiffuseMtrl_multiple_1;
+	gDiffuseMtrl_multiple[1] = gDiffuseMtrl_multiple_2;
+	gDiffuseMtrl_multiple[2] = gDiffuseMtrl_multiple_3;
+	
+	gDiffuseLight_multiple[0] = gDiffuseLight_multiple_1;
+	gDiffuseLight_multiple[1] = gDiffuseLight_multiple_2;
+	gDiffuseLight_multiple[2] = gDiffuseLight_multiple_3;
+	
+	for(int v = 0; v < maxLights; v++)
+	{
+		r = reflect(-IN.lightDir[v], IN.normalW);
+		t  = pow(max(dot(r, toEye), 0.0f), gSpecularPower);
+		spec += t*(gSpecularMtrl_multiple[v]*gSpecularLight_multiple[v]).rgb*LightIntensity_multiple[v];
+		
+		s = max(dot(IN.lightDir[v], IN.normalW), 0.0f);
+		diffuse += s*(gDiffuseMtrl_multiple[v]+gDiffuseLight_multiple[v])*LightIntensity_multiple[v];
+	}
+
+	//=======================================================
+	float4 texColor = tex2D(TexS,IN.tex0);
+	
+	float min = 0.35f;
+	
+	diffuse.r = clamp(diffuse.r,min,1.0f);
+	diffuse.g = clamp(diffuse.g,min,1.0f);
+	diffuse.b = clamp(diffuse.b,min,1.0f);
+	
+	
+	float4 diffuseTex = diffuse * texColor;
+	
+	
+	return float4(diffuseTex.rgb + ambient + spec, texColor.a);
+}
+
+#endif //#ifndef _PS_PHONG_MULTIPLELIGHTS_FXH_
