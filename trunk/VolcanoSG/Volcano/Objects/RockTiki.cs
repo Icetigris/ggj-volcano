@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Volcano
 {
-    class RockTiki : Node
+    class RockTiki : Actor
     {
         public override void Load()
         {

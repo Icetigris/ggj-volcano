@@ -14,6 +14,7 @@ namespace Volcano
 
         public static int LEFT =   1;
         public static int RIGHT = -1;
+        public static float SPEED = 1.5f;
 
         private Matrix projection;
         private Matrix view;
@@ -78,8 +79,8 @@ namespace Volcano
 
         private void UpdatePosition()
         {
-            position.X = Radius * (float)Math.Cos(Theta * 1.5);
-            position.Z = Radius * (float)Math.Sin(Theta * 1.5);
+            position.X = Radius * (float)Math.Cos(Theta * CircleCamera.SPEED);
+            position.Z = Radius * (float)Math.Sin(Theta * CircleCamera.SPEED);
         }
     }
 }
