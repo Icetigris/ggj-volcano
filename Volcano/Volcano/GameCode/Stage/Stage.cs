@@ -98,6 +98,9 @@ namespace Volcano
                            new Vector4(0.6f, 0.6f, 0.6f, 1.0f),
                            new Vector4(1.0f))
                        );
+
+            foreach (Strucure s in structures)
+                s.LoadContent();
         }
 
         public void Unload()

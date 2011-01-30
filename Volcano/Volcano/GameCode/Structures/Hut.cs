@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-<<<<<<< .mine
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-=======
 using Microsoft.Xna.Framework.Graphics;
->>>>>>> .r48
 
 namespace Volcano
 {
@@ -36,22 +33,20 @@ namespace Volcano
         /// <param name="game">The game.</param>
         /// <param name="center">The center of the hut.</param>
         public Hut(MainGame game, Stage stage, Vector2 center, double width, double height)
-<<<<<<< .mine
-            : base(game, center, width, height) { TheStage = stage; }
-=======
             : base(game, center, width, height)
         {
-            theStage = stage;
+            TheStage = stage;
             loadedContent = false;
             timeTillSpawn = SPAWN_DELAY;
         }
->>>>>>> .r48
+
+
 
         public override void Draw(GameTime gameTime)
         {
-<<<<<<< .mine
+
             Draw_CustomEffect(gameTime);
-=======
+
             //Game structure needs huts to work, just fuck drawing them
 
             /*if (!loadedContent)
@@ -87,7 +82,7 @@ namespace Volcano
                 }
                 mesh.Draw();
             }*/
->>>>>>> .r48
+
         }
 
 
@@ -188,7 +183,7 @@ namespace Volcano
                     effect.Parameters["gNumLights"].SetValue(Globals.numLights);
                     //effect.Parameters["gTex"].SetValue(the);
                     //effect.Parameters["gTime"].SetValue(visualEffect.Update_Time(gameTime));
-                    effect.Parameters["gIsTiki"].SetValue(true);
+                    effect.Parameters["gIsHut"].SetValue(true);
 
                     String parameter;
                     for (int v = 0; v < Globals.numLights; v++)
@@ -233,13 +228,20 @@ namespace Volcano
             {
                 timeTillSpawn = SPAWN_DELAY;
                 //spawn a tiki
-                theStage.enemies.Add(new Enemy(TheGame, theStage, new Vector3(center.X, 0, center.Y), ENEMY_SPAWN_HP));
+                TheStage.enemies.Add(new Enemy(TheGame, TheStage, new Vector3(center.X, 0, center.Y), ENEMY_SPAWN_HP));
             }
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             TheModel = TheContent.Load<Model>(@"Models\longhouse");
+
+            //create custom effect
+            visualEffect = new CustomEffects();
+            visualEffect.MondoEffect = TheContent.Load<Effect>(@"Effects\MondoEffect");
+
+            //Convert models using custom effects.
+            CustomEffects.ChangeEffectUsedByModel(TheStage, TheModel, visualEffect.MondoEffect);
         }
 
         public Vector2 FindSpawnPosition(GameTime seed)
