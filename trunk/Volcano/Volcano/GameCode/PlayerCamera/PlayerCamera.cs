@@ -29,9 +29,6 @@ namespace Volcano
 
         private Vector3 cameraReference = new Vector3(0.0f, 0.0f, -1.0f);
 
-        private float cameraYaw = 0.0f;
-        private float cameraPitch = 0.0f;
-
         private const float spinRate = 120.0f;
         private const float moveRate = 120.0f;
         private float theta;
@@ -111,23 +108,11 @@ namespace Volcano
                     (input.GamePads[playerIndex].IsButtonDown(Buttons.RightThumbstickUp)) ||
                     (input.GamePads[playerIndex].IsButtonDown(Buttons.DPadUp)))
                 {
-                    if (cameraPosition.Y <= 5000.0f) cameraPosition.Y += 200;
-                }
-
-                if (input.KeyboardState.IsKeyDown(Keys.S))
-                {
-                    cameraYaw += 200;
-                }
-                if (input.KeyboardState.IsKeyDown(Keys.W))
-                {
-                    cameraYaw -= 200;
+                    if (cameraPosition.Y <= 7000.0f) cameraPosition.Y += 200;
                 }
 
                 cameraPosition.X = radius * (float)Math.Cos(theta);
                 cameraPosition.Z = radius * (float)Math.Sin(theta);
-                cameraYaw = (cameraYaw < 0.0f) ? cameraYaw : ((cameraYaw > cameraPosition.Y) ? cameraPosition.Y : cameraYaw);
-                cameraTarget.Y = cameraPosition.Y - cameraYaw;
-                Console.Out.Write("Position: {0}, {1}, {2}\n", cameraPosition.X, cameraPosition.Y, cameraPosition.Z);
 
                 Matrix.CreateLookAt(ref cameraPosition, ref cameraTarget, ref cameraUpVector,
                     out view);
