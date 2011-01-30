@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Volcano
 {
-    class Volcano : Node
+    class Volcano : Actor
     {
         public override void Load()
         {

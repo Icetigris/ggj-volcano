@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\CircleCamera.cs" />
     <Compile Include="Core\Node.cs" />
     <Compile Include="Objects\RockTiki.cs" />
