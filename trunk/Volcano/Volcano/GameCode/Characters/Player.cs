@@ -222,7 +222,7 @@ namespace Volcano
                     //effect.Parameters["gLightVecW"].SetValue(new Vector3(0.0f, -1.0f, 0.0f));
                     //effect.Parameters["gDiffuseMtrl"].SetValue(new Vector4(1.0f));
                     //effect.Parameters["gDiffuseLight"].SetValue(Color.White.ToVector4());
-                    effect.Parameters["gAmbientMtrl"].SetValue(Color.White.ToVector4());
+                    effect.Parameters["gAmbientMtrl"].SetValue(Vector4.One);
                     effect.Parameters["gAmbientLight"].SetValue(new Vector4(0.1f));
                     //effect.Parameters["gSpecularMtrl"].SetValue(new Vector4(0.8f, 0.8f, 0.8f, 1.0f));
                     //effect.Parameters["gSpecularLight"].SetValue(Color.White.ToVector4());
