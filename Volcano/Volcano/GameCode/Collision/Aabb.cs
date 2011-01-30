@@ -21,22 +21,22 @@ namespace Volcano
             public static float distance = 10000;
             public struct Q1
             {
-                public static Vector3 min = Vector3.Zero;
+                public static Vector3 min = new Vector3(-20, -20, -20);
                 public static Vector3 max = new Vector3(distance, distance, distance);
             }
             public struct Q2
             {
-                public static Vector3 min = Vector3.Zero;
+                public static Vector3 min = new Vector3(-20, -20, 20);
                 public static Vector3 max = new Vector3(distance, distance, -distance);
             }
             public struct Q3
             {
-                public static Vector3 min = Vector3.Zero;
+                public static Vector3 min = new Vector3(20, -20, -20);
                 public static Vector3 max = new Vector3(-distance, distance, distance);
             }
             public struct Q4
             {
-                public static Vector3 min = Vector3.Zero;
+                public static Vector3 min = new Vector3(20, -20, 20);
                 public static Vector3 max = new Vector3(-distance, distance, -distance);
             }
         }

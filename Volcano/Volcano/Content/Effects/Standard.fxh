@@ -46,8 +46,11 @@ uniform extern float  gTime;
 //-------------------------
 // Volcano stuff
 //-------------------------
+uniform extern float  gIsVolcano;
+uniform extern float  gIsPlane;
 uniform extern float  gIsTiki;
 uniform extern float  gIsHut;
+uniform extern float  gIsRock;
 
 
 //-------------------------

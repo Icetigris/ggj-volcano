@@ -124,7 +124,13 @@ float4 Phong_MultipleLights_PS(vertOut_MultipleLights IN) : COLOR
 	}
 
 	//=======================================================
-	float4 texColor = tex2D(TexS,IN.tex0);
+	float4 texColor;
+	if(gIsVolcano)
+		texColor = tex2D(TexS,IN.tex0 * 0.008f);
+	else if(gIsPlane)
+		texColor = tex2D(TexS,IN.tex0 * 30);
+	else
+		texColor = tex2D(TexS,IN.tex0 );
 	
 	float min = 0.35f;
 	

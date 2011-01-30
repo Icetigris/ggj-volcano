@@ -145,15 +145,13 @@ namespace Volcano
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             SpriteBatch.Begin();
-
             base.Draw(gameTime);
+            SpriteBatch.End();
 
             //draw states...
             ManageStateDraw(gameTime);
 
-            SpriteBatch.End();
         }
 
         protected void ManageStateDraw(GameTime gameTime)
@@ -163,7 +161,10 @@ namespace Volcano
             {
                 TheStage.GraphicsDevice.RenderState.DepthBufferEnable = true;
                 TheStage.Draw(gameTime);
+
+                SpriteBatch.Begin();
                 TheHUD.Draw(SpriteBatch, gameTime);
+                SpriteBatch.End();
             }
         }
     }
