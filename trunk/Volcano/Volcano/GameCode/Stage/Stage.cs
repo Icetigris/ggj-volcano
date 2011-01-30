@@ -61,6 +61,24 @@ namespace Volcano
             //create player
             main = new Player(TheGame, this, Vector3.Zero, 100);
             TheCamera = new PlayerCamera(TheGame);
+            Globals.lights = new Lights[Globals.maxLights];
+
+            Lights.AddLight(new Lights(
+                           new Vector3(4000.0f, 200.0f, 0.0f),
+                           new Vector4(1.0f),
+                           new Vector4(1.0f),
+                           new Vector4(1.0f),
+                           new Vector4(1.0f, 0.0f, 0.0f, 1.0f),
+                           new Vector4(1.0f))
+                       );
+            Lights.AddLight(new Lights(
+                           new Vector3(-4000.0f, 200.0f, 0.0f),
+                           new Vector4(1.0f),
+                           new Vector4(1.0f),
+                           new Vector4(1.0f),
+                           new Vector4(0.0f, 0.0f, 1.0f, 1.0f),
+                           new Vector4(1.0f))
+                       );
         }
 
         public void Unload()

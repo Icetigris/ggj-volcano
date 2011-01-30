@@ -1,0 +1,141 @@
+/* Phong_MultipleLights.fxhv
+ * 
+ * 
+ */
+
+#ifndef _VS_PHONG_MULTIPLELIGHTS_FXH_
+#define _VS_PHONG_MULTIPLELIGHTS_FXH_
+
+#include "Standard.fxh"
+
+#ifndef MaxLights
+#define maxLights 3
+#endif
+
+#ifndef distanceScaleMainLight
+#define distanceScaleMainLight 0.00000002f;
+#endif
+
+#ifndef distanceScale
+#define distanceScale 0.00002f;
+#endif
+
+#ifndef attenMax
+#define attenMax 500.0f
+#endif
+
+#ifndef attenFactor
+#define attenFactor 0.002f
+#endif
+
+//multiple light system
+#ifndef _MULTIPLE_LIGHT_SYSTEM_
+#define _MULTIPLE_LIGHT_SYSTEM_
+uniform extern int gNumLights; 
+float3 gLightPos_multiple[maxLights];
+
+float4 gDiffuseMtrl_multiple[maxLights];
+float4 gDiffuseLight_multiple[maxLights];
+
+float4 gSpecularMtrl_multiple[maxLights];
+float4 gSpecularLight_multiple[maxLights];
+
+uniform extern float3 gLightPos_multiple_1;
+uniform extern float4 gDiffuseMtrl_multiple_1;
+uniform extern float4 gDiffuseLight_multiple_1;
+uniform extern float4 gSpecularMtrl_multiple_1;
+uniform extern float4 gSpecularLight_multiple_1;
+
+uniform extern float3 gLightPos_multiple_2;
+uniform extern float4 gDiffuseMtrl_multiple_2;
+uniform extern float4 gDiffuseLight_multiple_2;
+uniform extern float4 gSpecularMtrl_multiple_2;
+uniform extern float4 gSpecularLight_multiple_2;
+
+uniform extern float3 gLightPos_multiple_3;
+uniform extern float4 gDiffuseMtrl_multiple_3;
+uniform extern float4 gDiffuseLight_multiple_3;
+uniform extern float4 gSpecularMtrl_multiple_3;
+uniform extern float4 gSpecularLight_multiple_3;
+#endif //#ifndef _MULTIPLE_LIGHT_SYSTEM_
+
+#ifndef _VERTOUT_MULTIPLELIGHTS_
+#define _VERTOUT_MULTIPLELIGHTS_
+/* data passed from vertex shader to pixel shader */
+struct vertOut_MultipleLights{
+    float4 posH    : POSITION0;
+    float2 tex0    : TEXCOORD0;
+    float3 normalW : TEXCOORD1;
+    float3 posW    : TEXCOORD2;
+    float3 toEye    : TEXCOORD3;
+    float3 intensity   : TEXCOORD4;
+    float3 lightDir[maxLights]   : TEXCOORD5;
+};
+#endif //#ifndef _VERTOUT_MULTIPLELIGHTS_
+
+vertOut_MultipleLights Phong_MultipleLights_VS(
+							float3 in_posL		: POSITION0,
+							float3 in_normalL	: NORMAL0,
+							float2 in_tex0		: TEXCOORD0)
+{
+	vertOut_MultipleLights vOut = (vertOut_MultipleLights)0;
+	vOut.normalW = mul(float4(in_normalL,1.0f), gWIT).xyz;
+	vOut.posW  = mul(float4(in_posL, 1.0f), gWorld).xyz;
+	vOut.posH = mul(float4(in_posL,1.0f), gWVP);
+	vOut.tex0 = in_tex0;
+	
+	
+	float3 LightPos_multiple[maxLights];
+	LightPos_multiple[0] = gLightPos_multiple_1;
+	LightPos_multiple[1] = gLightPos_multiple_2;
+	LightPos_multiple[2] = gLightPos_multiple_3;
+	
+	float distance = 0.0f;
+	float x = 0.0f;
+	float y = 0.0f;
+	float z = 0.0f;
+	
+	float LightIntensity_multiple[maxLights] = {0.0f,0.0f,0.0f};
+
+	for(int v = 0; v < maxLights; v++)
+	{
+		x = (LightPos_multiple[v].x - vOut.posW.x);
+		y = (LightPos_multiple[v].y - vOut.posW.y);
+		z = (LightPos_multiple[v].z - vOut.posW.z);
+		distance = sqrt(x*x + y*y + z*z);
+		distance *= distance;
+		if(v == 0){
+			distance *= distanceScaleMainLight;
+		}
+		else{
+			distance *= distanceScale;
+		}
+		
+		if(distance <= 1)
+		{
+			LightIntensity_multiple[v] = 1.0f;
+		}
+		else if(distance > 1 && distance < attenMax)
+		{
+			LightIntensity_multiple[v] = (attenMax - distance)*attenFactor;
+		}
+		else if(distance >= attenMax)
+		{
+			LightIntensity_multiple[v] = 0.0f;
+		}
+		
+		//find direction of light to vertex
+		x = (LightPos_multiple[v].x - vOut.posW.x);
+		y = (LightPos_multiple[v].y - vOut.posW.y);
+		z = (LightPos_multiple[v].z - vOut.posW.z);
+		vOut.lightDir[v] = normalize(float3(x,y,z));
+	}
+	
+	vOut.intensity.x = saturate(LightIntensity_multiple[0]);
+	vOut.intensity.y = saturate(LightIntensity_multiple[1]);
+	vOut.intensity.z = saturate(LightIntensity_multiple[2]);
+	
+    return vOut;
+}
+
+#endif //#ifndef _VS_PHONG_MULTIPLELIGHTS_FXH_
