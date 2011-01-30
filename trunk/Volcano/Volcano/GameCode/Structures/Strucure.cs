@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Volcano
 {
@@ -22,7 +24,13 @@ namespace Volcano
         /// The center of the building.
         /// </summary>
         public Vector2 center { get; private set; }
-        
+
+        public Model TheModel { get; protected set; }
+        public Matrix TheRotation { get; protected set; }
+        public ContentManager TheContent { get; protected set; }
+        public GraphicsDeviceManager TheGraphics { get; private set; }
+        protected MainGame TheGame;
+
         /// <summary>
         /// Make a new structure.
         /// </summary>
@@ -31,6 +39,11 @@ namespace Volcano
         public Strucure(MainGame game, Vector2 center, double width, double height)
             : base(game)
         {
+            TheGame = game;
+            TheContent = new ContentManager(game.Services, "Content");
+            TheGraphics = game.graphics;
+            TheRotation = Matrix.Identity;
+
             this.center = center;
             Vector2 a, b, c, d;
             a = center + new Vector2((float)width / 2, (float)height / 2);

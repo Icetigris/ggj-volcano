@@ -11,6 +11,8 @@ namespace Volcano
 {
     class Enemy : Character
     {
+        private static float MOVE_SPEED = 1;
+
         #region Variables
         /// <summary>
         /// The stage.
@@ -36,7 +38,7 @@ namespace Volcano
         protected override void LoadContent()
         {
             //load model.
-            TheModel = TheContent.Load<Model>(@"Models\hugetiki");
+            TheModel = TheContent.Load<Model>(@"Models\rocktiki");
 
             //create custom effect
             visualEffect = new CustomEffects();
@@ -59,12 +61,20 @@ namespace Volcano
 
         public override void Update(GameTime gameTime)
         {
-            //TODO move the enemies (YES THIS MEANS PATHFINDING :\)
+            //move the enemies
+            float distanceToMove = (float)gameTime.ElapsedRealTime.TotalSeconds * MOVE_SPEED;
+            Vector3 directionToMove = (Globals.topOfVolcano - Position);
+            directionToMove.Normalize();
+            directionToMove.X *= distanceToMove;
+            directionToMove.Y *= distanceToMove;
+            directionToMove.Z *= distanceToMove;
+            Position += directionToMove;
+
             //Berfore/after moving...
-            //foreach (Attack a in theStage.attacks)
-            //{
+            foreach (Attack a in theStage.attacks)
+            {
                 //Check the enemies hitbox with the attack area, if there's a hit do damage.
-            //}
+            }
 
             TheAabb.Update(gameTime);
             
