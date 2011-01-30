@@ -17,6 +17,36 @@ namespace Volcano
         public List<Line> Lines { get; set; }
 
         /// <summary>
+        /// Tests if a line hits the polygon.
+        /// </summary>
+        /// <param name="b">The other line.</param>
+        /// <returns>true if the line hits the polygon; false otherwise.</returns>
+        public bool doesLineHitPoly(Line b)
+        {
+            foreach (var a in Lines)
+            {
+                double ma = (a.Start.Y - a.End.Y) / (a.Start.X - a.End.X);
+                double mb = (b.Start.Y - b.End.Y) / (b.Start.X - b.End.X);
+                double xa1 = a.Start.X;
+                double xb1 = b.Start.X;
+                double ya1 = a.Start.Y;
+                double yb1 = b.Start.Y;
+
+                double x = (ma * xa1 - mb * xb1 + yb1 - ya1) / (ma - mb);
+                //WOW THAT WAS A LOT OF MATH
+
+                bool isOnA = ((x < a.Start.X) && (x > a.End.X)) || ((x > a.Start.X) && (x < a.End.X));
+                bool isOnB = ((x < b.Start.X) && (x > b.End.X)) || ((x > b.Start.X) && (x < b.End.X));
+                //WOW THAT WAS SIMPLE
+
+                if (isOnA && isOnB)
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Tests if the given point is inside the polygon.
         /// </summary>
         /// <param name="point">Point to test.</param>
@@ -47,6 +77,9 @@ namespace Volcano
     /// </summary>
     public class Line
     {
+        public Line() { }
+        public Line(Vector2 start, Vector2 end) { Start = start; End = end; }
+
         /// <summary>
         /// Start of the line.
         /// </summary>
