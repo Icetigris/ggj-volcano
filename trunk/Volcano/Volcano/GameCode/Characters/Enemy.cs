@@ -36,7 +36,7 @@ namespace Volcano
         protected override void LoadContent()
         {
             //load model.
-            TheModel = TheContent.Load<Model>(@"Models\rocktiki");
+            TheModel = TheContent.Load<Model>(@"Models\hugetiki");
 
             //create custom effect
             visualEffect = new CustomEffects();

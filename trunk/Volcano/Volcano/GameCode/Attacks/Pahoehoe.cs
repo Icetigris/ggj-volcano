@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
@@ -9,9 +8,17 @@ namespace Volcano
     class Pahoehoe : Attack
     {
         /// <summary>
-        /// Creates a new Pahoehoe.
+        /// Creates a new Pahoehoe lava flow.
         /// </summary>
-        /// <param name="game">The game.  (You just lost.)</param>
+        /// <param name="game"></param>
+        /// 
+        #region Variables
+
+        float flowRate; //tweak variable for changing lava rate of flow
+
+
+        #endregion
+
         public Pahoehoe(Game game) : base(game) { }
 
         public override void Update(GameTime gameTime)

@@ -89,10 +89,14 @@ namespace Volcano
                 //increase/decrease player pressure. Testing purporses.
                 if (TheInput.KeyboardState.IsKeyDown(Keys.I) &&
                     (Pressure + offset) <= MaxPressure)
+                {
                     Pressure += offset;
+                }
                 if (TheInput.KeyboardState.IsKeyDown(Keys.O) &&
                         (Pressure - offset) >= 0)
+                {
                     Pressure -= offset;
+                }
 
                 TheAa.Update(gameTime);
             }

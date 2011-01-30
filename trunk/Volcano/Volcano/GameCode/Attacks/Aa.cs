@@ -13,7 +13,7 @@ namespace Volcano
 {
     public class Aa : Attack
     {
-        #region variables
+        #region Variables
 
         public Model TheQ1 { get; private set; }
         public Model TheQ2 { get; private set; }
@@ -36,9 +36,8 @@ namespace Volcano
         #endregion
 
         /// <summary>
-        /// Creates a new Aa.
+        /// Creates a new Aa lava flow.
         /// </summary>
-        /// <param name="game">The game.  (You just lost.)</param>
         public Aa(Game game, Player player) : base(game) {
             ThePlayer = player;
 
