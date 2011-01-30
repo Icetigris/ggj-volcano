@@ -16,7 +16,6 @@ namespace Volcano
         /// <summary>
         /// Creates a new Attack.
         /// </summary>
-        /// <param name="game">The game.  (You just lost.)</param>
         public Attack(Game game) : base(game) { }
 
         /// <summary>

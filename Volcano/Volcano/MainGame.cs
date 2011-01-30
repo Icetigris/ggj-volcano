@@ -164,6 +164,7 @@ namespace Volcano
             if (gameManager.State == PlayingState ||
                 gameManager.State == PausedState)
             {
+                TheStage.GraphicsDevice.RenderState.DepthBufferEnable = true;
                 TheStage.Draw(gameTime);
                 TheHUD.Draw(SpriteBatch, gameTime);
             }
