@@ -201,7 +201,7 @@ namespace Volcano
                                                         replacementEffect.GraphicsDevice);
 
                             // Copy across the texture from the original effect.
-                            //newEffect.Parameters["gTex0"].SetValue(tempEffect.Texture);
+                            newEffect.Parameters["gTex0"].SetValue(tempEffect.Texture);
 
                             effectMapping.Add(oldEffect, newEffect);
                         }
@@ -248,7 +248,7 @@ namespace Volcano
                                                         replacementEffect.GraphicsDevice);
 
                             // Copy across the texture from the original effect.
-                            //newEffect.Parameters["gTex0"].SetValue(oldEffect.Texture);
+                            newEffect.Parameters["gTex"].SetValue(oldEffect.Texture);
 
                             effectMapping.Add(oldEffect, newEffect);
                         }
