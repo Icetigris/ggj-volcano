@@ -31,6 +31,8 @@ namespace Volcano
 
         public Texture2D TheLavaTex { get; private set; }
 
+        public Timer TheDrawTimer;
+
         #endregion
 
         /// <summary>
@@ -64,10 +66,14 @@ namespace Volcano
             CustomEffects.ChangeEffectUsedByModel(TheQ2, visualEffect.MondoEffect);
             CustomEffects.ChangeEffectUsedByModel(TheQ3, visualEffect.MondoEffect);
             CustomEffects.ChangeEffectUsedByModel(TheQ4, visualEffect.MondoEffect);
+
+            TheDrawTimer = new Timer();
         }
 
         public override void Update(GameTime gameTime)
         {
+            TheDrawTimer.Update(gameTime);
+
             //TODO: This will update the flow of the lava, changing the current hit polygon.
             if (ThePlayer.TheInput.KeyboardState.IsKeyDown(Keys.Y))
             {
@@ -96,6 +102,18 @@ namespace Volcano
                 DrawQ2 = false;
                 DrawQ3 = false;
                 DrawQ4 = true;
+            }
+
+            if (DrawQ1 || DrawQ2 || DrawQ3 || DrawQ4)
+            {
+                var LengthOfAttack = 0.8f;
+                if (TheDrawTimer.TargetTimeSeconds(LengthOfAttack))
+                {
+                    DrawQ1 = false;
+                    DrawQ2 = false;
+                    DrawQ3 = false;
+                    DrawQ4 = false;
+                }
             }
         }
 
@@ -143,7 +161,6 @@ namespace Volcano
                         Matrix world = ThePlayer.TheRotation * transforms[mesh.ParentBone.Index] *
                             Matrix.CreateTranslation(new Vector3(ThePlayer.Position.X, ThePlayer.Position.Y + 250, ThePlayer.Position.Z + 1000));
 
-                        //DrawModel_Effect(TheModel, transforms, world, projection, "MultipleLights");
                         DrawModel_Effect(TempModel, transforms, world, projection, gameTime, "LavaAttack_Light");
                     }
                 }

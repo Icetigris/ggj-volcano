@@ -88,15 +88,18 @@ namespace Volcano
         {
             int offset = 5;
 
-            //increase/decrease player pressure. Testing purporses.
-            if (TheInput.KeyboardState.IsKeyDown(Keys.I) &&
-                (Pressure + offset) <= MaxPressure)
-                Pressure += offset;
-            if (TheInput.KeyboardState.IsKeyDown(Keys.O) &&
-                    (Pressure - offset) >= 0)
-                Pressure -= offset;
+            if (theStage.TheGame.gameManager.State == theStage.TheGame.PlayingState)
+            {
+                //increase/decrease player pressure. Testing purporses.
+                if (TheInput.KeyboardState.IsKeyDown(Keys.I) &&
+                    (Pressure + offset) <= MaxPressure)
+                    Pressure += offset;
+                if (TheInput.KeyboardState.IsKeyDown(Keys.O) &&
+                        (Pressure - offset) >= 0)
+                    Pressure -= offset;
 
-            TheAa.Update(gameTime);
+                TheAa.Update(gameTime);
+            }
         }
 
         public override void Draw(GameTime gameTime)
