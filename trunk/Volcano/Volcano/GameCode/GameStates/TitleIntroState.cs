@@ -26,7 +26,8 @@ namespace Volcano
             if (Input.WasPressed(0, Buttons.Start, Keys.Enter))
             {
                 // push our start menu onto the stack
-                GameManager.PushState(OurGame.StartMenuState.Value);
+                //GameManager.PushState(OurGame.StartMenuState.Value);
+                GameManager.PushState(OurGame.PlayingState.Value);
             }
 
             base.Update(gameTime);

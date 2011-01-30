@@ -64,7 +64,7 @@ namespace Volcano
         {
             base.Initialize();
             Random rand = new Random();
-            float radius = rand.Next(2000, 3000);
+            float radius = rand.Next(3000, 4000);
 
             for (int i = 0; i < (new Random()).Next(5, 8); i++)
             {
