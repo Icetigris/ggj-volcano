@@ -49,10 +49,10 @@ namespace Volcano
 
         public void LoadContent()
         {
-            TheQ1 = ThePlayer.TheContent.Load<Model>(@"Models\volcano-q1");
-            TheQ2 = ThePlayer.TheContent.Load<Model>(@"Models\volcano-q2");
+            TheQ1 = ThePlayer.TheContent.Load<Model>(@"Models\volcano-q4");
+            TheQ2 = ThePlayer.TheContent.Load<Model>(@"Models\volcano-q1");
             TheQ3 = ThePlayer.TheContent.Load<Model>(@"Models\volcano-q3");
-            TheQ4 = ThePlayer.TheContent.Load<Model>(@"Models\volcano-q4");
+            TheQ4 = ThePlayer.TheContent.Load<Model>(@"Models\volcano-q2");
 
             TheLavaTex = ThePlayer.TheContent.Load<Texture2D>(@"Textures\TempLava");
 

@@ -113,11 +113,23 @@ namespace Volcano
         //active region.
         public bool FindAreAabbsCollided(Aabb quadrant, Aabb enemy)
         {
-            if (CheckAreVec3Equal(enemy.TheMin, quadrant.TheMin) > 0 &&
-                CheckAreVec3Equal(enemy.TheMax, quadrant.TheMax) < 0)
-                return true;
+            //if (CheckAreVec3Equal(enemy.TheMin, quadrant.TheMin) > 0 &&
+            //    CheckAreVec3Equal(enemy.TheMax, quadrant.TheMax) < 0)
+            //    return true;
 
-            return false;
+            //return false;
+
+            return AreNumbersOrdered(quadrant.TheMin.X, enemy.TheMin.X, quadrant.TheMax.X) &&
+                    AreNumbersOrdered(quadrant.TheMin.X, enemy.TheMax.X, quadrant.TheMax.X) &&
+                    AreNumbersOrdered(quadrant.TheMin.Y, enemy.TheMin.Y, quadrant.TheMax.Y) &&
+                    AreNumbersOrdered(quadrant.TheMin.Y, enemy.TheMax.Y, quadrant.TheMax.Y) &&
+                    AreNumbersOrdered(quadrant.TheMin.Z, enemy.TheMin.Z, quadrant.TheMax.Z) &&
+                    AreNumbersOrdered(quadrant.TheMin.Z, enemy.TheMax.Z, quadrant.TheMax.Z);
+        }
+
+        private bool AreNumbersOrdered(float a, float b, float c)
+        {
+            return (a<=b && b<=c) || (c<=b && b<=a);
         }
         /// <summary>
         /// returns (-1) if all components of first less than second.
@@ -127,21 +139,26 @@ namespace Volcano
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        private int CheckAreVec3Equal(Vector3 first, Vector3 second)
-        {
-            if (first.X < second.X &&
-                first.Y < second.Y &&
-                first.Z < second.Z)
-                return -1;
+        //private int CheckAreVec3Equal(Vector3 first, Vector3 second)
+        //{
+        //    if (first.X == second.X &&
+        //        first.Y == second.Y &&
+        //        first.Z == second.Z)
+        //        return 0;
 
-            else if (first.X > second.X &&
-                first.Y > second.Y &&
-                first.Z > second.Z)
-                return 1;
+        //    else if (first.X <= second.X &&
+        //        first.Y <= second.Y &&
+        //        first.Z <= second.Z)
+        //        return -1;
+
+        //    else if (first.X >= second.X &&
+        //        first.Y >= second.Y &&
+        //        first.Z >= second.Z)
+        //        return 1;
 
 
-            return 0;
-        }
+        //    return 0;
+        //}
 
     }
 }

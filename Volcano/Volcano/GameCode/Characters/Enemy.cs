@@ -75,18 +75,14 @@ namespace Volcano
             directionToMove.Z *= distanceToMove;
             Position += directionToMove;
 
-            //Berfore/after moving...
-            foreach (Attack a in theStage.attacks)
-            {
-                //Check the enemies hitbox with the attack area, if there's a hit do damage.
-            }
-
             TheAabb.Update(gameTime);
 
+            if (TheAabb.InCollision)
+            {
+                //TheStage.enemies.Remove(this);
+                Health = 0;
+            }
             ARock.Draw(gameTime);
-            
-            //Since we're not really doing anything here...
-            base.Update(gameTime);
         }
 
         private void Draw_BasicEffect(GameTime gameTime)

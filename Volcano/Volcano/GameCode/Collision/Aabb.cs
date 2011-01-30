@@ -18,7 +18,7 @@ namespace Volcano
     {
         public struct Quadrants
         {
-            public static float distance = 400;
+            public static float distance = 10000;
             public struct Q1
             {
                 public static Vector3 min = Vector3.Zero;
@@ -37,7 +37,7 @@ namespace Volcano
             public struct Q4
             {
                 public static Vector3 min = Vector3.Zero;
-                public static Vector3 max = new Vector3(-distance, distance, distance);
+                public static Vector3 max = new Vector3(-distance, distance, -distance);
             }
         }
         public struct Tiki_1
@@ -53,6 +53,8 @@ namespace Volcano
 
         public Vector3 TheMin { get; private set; }
         public Vector3 TheMax { get; private set; }
+        public Vector3 Min { get; private set; }
+        public Vector3 Max { get; private set; }
 
         public bool InCollision { get; set; }
 
@@ -63,16 +65,16 @@ namespace Volcano
         public Aabb(Character character, Vector3 min, Vector3 max)
         {
             TheCharacter = character;
-            TheMin = min;
-            TheMax = max;
+            Min = TheMin = min;
+            Max = TheMax = max;
         }
 
         public void Update(GameTime gameTime)
         {
             if (TheCharacter != null)
             {
-                TheMin += TheCharacter.Position;
-                TheMax += TheCharacter.Position;
+                TheMin = TheCharacter.Position + Min;
+                TheMax = TheCharacter.Position + Max;
             }
         }
     }
