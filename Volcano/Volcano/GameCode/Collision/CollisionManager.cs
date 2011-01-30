@@ -74,6 +74,39 @@ namespace Volcano
                     TheStage.enemies[c] = e;
                 }
             }
+            else if (IsQ2Active)
+            {
+                for (int c = 0; c < TheStage.enemies.Count; c++)
+                {
+                    Enemy e = (Enemy)TheStage.enemies[c];
+                    e.TheAabb.InCollision = FindAreAabbsCollided(TheQ2, e.TheAabb);
+
+                    //just to be safe...
+                    TheStage.enemies[c] = e;
+                }
+            }
+            else if (IsQ3Active)
+            {
+                for (int c = 0; c < TheStage.enemies.Count; c++)
+                {
+                    Enemy e = (Enemy)TheStage.enemies[c];
+                    e.TheAabb.InCollision = FindAreAabbsCollided(TheQ3, e.TheAabb);
+
+                    //just to be safe...
+                    TheStage.enemies[c] = e;
+                }
+            }
+            else if (IsQ4Active)
+            {
+                for (int c = 0; c < TheStage.enemies.Count; c++)
+                {
+                    Enemy e = (Enemy)TheStage.enemies[c];
+                    e.TheAabb.InCollision = FindAreAabbsCollided(TheQ4, e.TheAabb);
+
+                    //just to be safe...
+                    TheStage.enemies[c] = e;
+                }
+            }
         }
 
         //Check and see if the enemy is in collision with the

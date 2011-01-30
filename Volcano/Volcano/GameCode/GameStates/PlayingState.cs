@@ -30,7 +30,9 @@ namespace Volcano
         public override void Update(GameTime gameTime)
         {
             if (Input.WasPressed(0, Buttons.Back, Keys.Escape))
-                GameManager.PushState(OurGame.StartMenuState.Value);
+            {
+                this.Game.Exit();
+            }
 
             // push our paused state onto the stack
             if (Input.WasPressed(0, Buttons.Start, Keys.Enter))
@@ -58,14 +60,7 @@ namespace Volcano
 
         public override void Draw(GameTime gameTime)
         {
-            OurGame.SpriteBatch.DrawString(font,
-                "Playing the game ... playing the game",
-                new Vector2(20, 120), Color.White);
-            OurGame.SpriteBatch.DrawString(font,
-                "Playing the game ... playing the game",
-                new Vector2(20, 220), Color.Red);
 
-            //base.Draw(gameTime);
         }
 
         protected override void StateChanged(object sender, EventArgs e)

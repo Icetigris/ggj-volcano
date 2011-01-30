@@ -14,7 +14,7 @@ namespace Volcano
     {
         private static float SPAWN_AREA_X = 100;
         private static float SPAWN_AREA_Y = 100;
-        private static float SPAWN_DELAY = 7.5;
+        private static float SPAWN_DELAY = 7.5f;
         private static int ENEMY_SPAWN_HP = 1;
 
         public Stage TheStage { get; private set; }
@@ -22,8 +22,6 @@ namespace Volcano
         
         private bool loadedContent;
         private float timeTillSpawn;
-
-
 
         private CustomEffects visualEffect;
 
@@ -139,9 +137,9 @@ namespace Volcano
                     visualEffect.Set_Phong_Ambient(Vector4.One, new Vector4(0.1f, 0.1f, 0.1f, 1.0f));
                     visualEffect.Set_Phong_Specular(new Vector4(0.8f, 0.8f, 0.8f, 1.0f), Vector4.One, 20.0f);
 
-                    Matrix TheRotation = Matrix.CreateRotationX(1.57079633f);
-                    Matrix world = transforms[mesh.ParentBone.Index] *
-                        Matrix.CreateTranslation(new Vector3(center.X, 10.0f, center.Y));
+                    Matrix TheRotation = Matrix.CreateRotationZ(3.14159265f);
+                    Matrix world = TheRotation * transforms[mesh.ParentBone.Index] *
+                        Matrix.CreateTranslation(new Vector3(center.X, -1500.0f, center.Y));
 
                     DrawModel_Effect(TheModel, transforms, world, projection, gameTime, "MultipleLights");
                 }
