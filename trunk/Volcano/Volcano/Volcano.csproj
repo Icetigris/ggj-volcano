@@ -91,6 +91,7 @@
     <Compile Include="GameCode\Attacks\Aa.cs" />
     <Compile Include="GameCode\Attacks\Attack.cs" />
     <Compile Include="GameCode\Attacks\Pahoehoe.cs" />
+    <Compile Include="GameCode\Attacks\Rock.cs" />
     <Compile Include="GameCode\Characters\Character.cs" />
     <Compile Include="GameCode\Characters\Enemy.cs" />
     <Compile Include="GameCode\Characters\Player.cs" />
