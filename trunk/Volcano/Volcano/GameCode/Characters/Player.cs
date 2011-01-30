@@ -19,6 +19,11 @@ namespace Volcano
         /// </summary>
         private Stage theStage;
 
+        //temporarytemporarytemporarytemporary
+        public Texture2D TheLavaTex { get; private set; }
+        public Model TheQ1 { get; private set; }
+        //endendendendendendendendendendendend
+
         private CustomEffects visualEffect;
 
         public InputHandler TheInput { get; private set; }
@@ -27,6 +32,8 @@ namespace Volcano
         public int MaxPressure { get; private set; }
         public int MinPressure { get; private set; }
         public int InitialPressure { get; private set; }
+
+        public Aa TheAa { get; private set; }
 
         #endregion
 
@@ -55,6 +62,7 @@ namespace Volcano
         {
             //get our input manager...
             TheInput = mainGame.input;
+            TheAa = new Aa(mainGame, this);
         }
         protected override void LoadContent()
         {
@@ -67,6 +75,8 @@ namespace Volcano
 
             //Convert models using custom effects.
             CustomEffects.ChangeEffectUsedByModel(TheModel, visualEffect.MondoEffect);
+
+            TheAa.LoadContent();
 
         }
         public override void UnloadContent()
@@ -86,6 +96,7 @@ namespace Volcano
                     (Pressure - offset) >= 0)
                 Pressure -= offset;
 
+            TheAa.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -93,6 +104,7 @@ namespace Volcano
             //Draw_BasicEffect(gameTime);
 
             Draw_CustomEffect(gameTime);
+            TheAa.Draw(gameTime);
         }
 
         private void Draw_BasicEffect(GameTime gameTime)
@@ -151,13 +163,13 @@ namespace Volcano
                     Matrix world = TheRotation * transforms[mesh.ParentBone.Index] * 
                         Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, Position.Z + 1000));
 
-                    DrawModel_Effect(TheModel, transforms, world, projection, "MultipleLights");
+                    DrawModel_Effect(TheModel, transforms, world, projection, gameTime,"MultipleLights");
                 }
             }
         }
 
 
-        private void DrawModel_Effect(Model model, Matrix[] transform, Matrix world, Matrix projection, string technique)
+        private void DrawModel_Effect(Model model, Matrix[] transform, Matrix world, Matrix projection, GameTime gameTime, string technique)
         {
             // Set suitable renderstates for drawing a 3D model.
             RenderState renderState = TheGraphics.GraphicsDevice.RenderState;
@@ -188,6 +200,8 @@ namespace Volcano
                     effect.Parameters["gEyePosW"].SetValue(TheStage.TheCamera.Position);
 
                     effect.Parameters["gNumLights"].SetValue(Globals.numLights);
+                    //effect.Parameters["gTex"].SetValue(the);
+                    //effect.Parameters["gTime"].SetValue(visualEffect.Update_Time(gameTime));
 
                     String parameter;
                     for (int v = 0; v < Globals.numLights; v++)

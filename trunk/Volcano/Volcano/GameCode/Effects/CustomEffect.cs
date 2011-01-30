@@ -63,12 +63,18 @@ namespace Volcano
         }
 
         #region Phong Special Effects
-        public void Update_Time(GameTime time)
+        public float Update_Time(GameTime time)
         {
-            elapsedTime += (float)time.ElapsedGameTime.Milliseconds / 100;
+            elapsedTime += (float)time.ElapsedGameTime.Milliseconds / 50;
             MondoEffect.Parameters["gTime"].SetValue(elapsedTime);
             this.gTime = elapsedTime;
+
+            if (elapsedTime > 10000)
+                elapsedTime = 0.0f;
+
             MondoEffect.CommitChanges();
+
+            return elapsedTime;
         }
         public void Set_Viewport_Height(int height)
         {
